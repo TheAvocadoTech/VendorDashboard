@@ -64,8 +64,8 @@ const othersItems: NavItem[] = [
     icon: <BoxCubeIcon />,
     name: "Order Management",
     subItems: [
-      { name: "View New Orders", path: "/alerts", pro: false },
-      { name: "View Order History", path: "/avatars", pro: false },
+      { name: "View New Orders", path: "/viewneworders", pro: false },
+      { name: "View Order History", path: "/vieworderhistory", pro: false },
       { name: "Track Current Orders ", path: "/avatars", pro: false },
     ],
   },
@@ -73,8 +73,8 @@ const othersItems: NavItem[] = [
     icon: <BoxCubeIcon />,
     name: "Inventory Management",
     subItems: [
-      { name: "Add New Inventory", path: "/alerts", pro: false },
-      { name: "View Current Inventory ", path: "/avatars", pro: false },
+      { name: "Add New Inventory", path: "/addnewinventory", pro: false },
+      { name: "View Current Inventory ", path: "/viewcurrentinventory", pro: false },
       // { name: "Manage Product Pricing", path: "/badge", pro: false },
     ],
   },
