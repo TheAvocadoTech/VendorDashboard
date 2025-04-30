@@ -31,91 +31,57 @@ const navItems: NavItem[] = [
 const othersItems: NavItem[] = [
   {
     icon: <PieChartIcon />,
-    name: "Analytics",
+    name: "Vendor Analytics",
     subItems: [
-      { name: "Sales Report", path: "/line-chart", pro: false },
-      { name: "Vendor Performance", path: "/bar-chart", pro: false },
-      { name: "Product Popularity", path: "/bar-chart", pro: false },
-      { name: "User Engagment Metrics", path: "/bar-chart", pro: false },
+      { name: "Sales Performance", path: "/line-chart", pro: false },
+      { name: "Population  Product", path: "/bar-chart", pro: false },
+      { name: "Customer Feedback", path: "/bar-chart", pro: false },
+      { name: "Order Completion Rates ", path: "/bar-chart", pro: false },
     ],
   },
   {
     icon: <PieChartIcon />,
-    name: "Platform Settings",
+    name: "Account Settings",
     subItems: [
-      { name: "Payment Gateway Setting", path: "/line-chart", pro: false },
-      { name: "Delievery Zone Managment", path: "/bar-chart", pro: false },
-      { name: "Commission Settings", path: "/bar-chart", pro: false },
-      { name: "App Settings", path: "/bar-chart", pro: false },
-      { name: "System Performance", path: "/bar-chart", pro: false },
+      { name: "Update store Details ", path: "/line-chart", pro: false },
+      { name: "Manage  Operation hours", path: "/bar-chart", pro: false },
+      { name: "Update contact  information ", path: "/bar-chart", pro: false },
+      { name: "Manage  Payment Details", path: "/bar-chart", pro: false },
+     
     ],
   },
   {
     icon: <PieChartIcon />,
-    name: "Vendor Portal Settings",
+    name: "Communication",
     subItems: [
-      { name: "Vendor Login Approval", path: "/line-chart", pro: false },
-      { name: "View Vendor Stock Updates", path: "/bar-chart", pro: false },
-      { name: "Process Stock Exchange requests", path: "/bar-chart", pro: false },
-      { name: "Show order assignment to vendors", path: "/bar-chart", pro: false },
-      { name: "System Performance", path: "/bar-chart", pro: false },
-    ],
-  },
-  {
-    icon: <BoxCubeIcon />,
-    name: "Categories Management",
-    subItems: [
-      { name: "Add New Categories", path: "/alerts", pro: false },
-      { name: "View Categories", path: "/avatars", pro: false },
-    ],
-  },
-  {
-    icon: <BoxCubeIcon />,
-    name: "Product Management",
-    subItems: [
-      { name: "Add New Product", path: "/alerts", pro: false },
-      { name: "View Products", path: "/avatars", pro: false },
-      { name: "Manage Product Pricing", path: "/badge", pro: false },
-    ],
-  },
-  {
-    icon: <BoxCubeIcon />,
-    name: "Vendor Management",
-    subItems: [
-      { name: "Approve New Vendor", path: "/alerts", pro: false },
-      { name: "Manage Vendor Accounts", path: "/avatars", pro: false },
-      { name: "Review Vendor Stock updates", path: "/badge", pro: false },
-      { name: "View Vendor Analytics", path: "/buttons", pro: false },
+      { name: "View Admin Notification", path: "/line-chart", pro: false },
+      { name: "Support  Request", path: "/bar-chart", pro: false },
+      { name: "Platfrom  Announcemnt", path: "/bar-chart", pro: false },
+      
     ],
   },
   {
     icon: <BoxCubeIcon />,
     name: "Order Management",
     subItems: [
-      { name: "View All Orders", path: "/alerts", pro: false },
-      { name: "Track Order Status", path: "/avatars", pro: false },
-      { name: "Handle Order Issues", path: "/badge", pro: false },
-      { name: "Order Reassigned", path: "/buttons", pro: false },
+      { name: "View New Orders", path: "/alerts", pro: false },
+      { name: "View Order History", path: "/avatars", pro: false },
+      { name: "Track Current Orders ", path: "/avatars", pro: false },
     ],
   },
   {
     icon: <BoxCubeIcon />,
-    name: "User Management",
+    name: "Inventory Management",
     subItems: [
-      { name: "View User Account", path: "/alerts", pro: false },
-      { name: "Handle User Cases", path: "/avatars", pro: false },
-      { name: "User Analytics", path: "/badge", pro: false },
-      { name: "User Order", path: "/badge", pro: false },
+      { name: "Add New Inventory", path: "/alerts", pro: false },
+      { name: "View Current Inventory ", path: "/avatars", pro: false },
+      // { name: "Manage Product Pricing", path: "/badge", pro: false },
     ],
   },
-  {
-    icon: <PlugInIcon />,
-    name: "Authentication",
-    subItems: [
-      { name: "Sign In", path: "/signin", pro: false },
-      { name: "Sign Up", path: "/signup", pro: false },
-    ],
-  },
+  
+  
+  
+  
 ];
 
 const AppSidebar: React.FC = () => {
