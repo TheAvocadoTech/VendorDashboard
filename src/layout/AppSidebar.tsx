@@ -33,20 +33,20 @@ const othersItems: NavItem[] = [
     icon: <PieChartIcon />,
     name: "Vendor Analytics",
     subItems: [
-      { name: "Sales Performance", path: "/line-chart", pro: false },
-      { name: "Population  Product", path: "/bar-chart", pro: false },
-      { name: "Customer Feedback", path: "/bar-chart", pro: false },
-      { name: "Order Completion Rates ", path: "/bar-chart", pro: false },
+      { name: "Sales Performance", path: "/salesperformance", pro: false },
+      { name: "Population  Product", path: "/populationproduct", pro: false },
+      { name: "Customer Feedback", path: "/customerfeedback", pro: false },
+      { name: "Order Completion Rates ", path: "/ordercompletionrate", pro: false },
     ],
   },
   {
     icon: <PieChartIcon />,
     name: "Account Settings",
     subItems: [
-      { name: "Update store Details ", path: "/line-chart", pro: false },
-      { name: "Manage  Operation hours", path: "/bar-chart", pro: false },
-      { name: "Update contact  information ", path: "/bar-chart", pro: false },
-      { name: "Manage  Payment Details", path: "/bar-chart", pro: false },
+      { name: "Update store Details ", path: "/updatevendordetails", pro: false },
+      { name: "Manage  Operation hours", path: "/manageoperationhours", pro: false },
+      { name: "Update contact  information ", path: "/updatecontactinformation", pro: false },
+      { name: "Manage  Payment Details", path: "/managepaymentdetails", pro: false },
      
     ],
   },
@@ -54,9 +54,9 @@ const othersItems: NavItem[] = [
     icon: <PieChartIcon />,
     name: "Communication",
     subItems: [
-      { name: "View Admin Notification", path: "/line-chart", pro: false },
-      { name: "Support  Request", path: "/bar-chart", pro: false },
-      { name: "Platfrom  Announcemnt", path: "/bar-chart", pro: false },
+      { name: "View Admin Notification", path: "/viewadminnotification", pro: false },
+      { name: "Support  Request", path: "/supportrequest", pro: false },
+      { name: "Platfrom  Announcemnt", path: "/platformannouncement", pro: false },
       
     ],
   },
@@ -66,7 +66,7 @@ const othersItems: NavItem[] = [
     subItems: [
       { name: "View New Orders", path: "/viewneworders", pro: false },
       { name: "View Order History", path: "/vieworderhistory", pro: false },
-      { name: "Track Current Orders ", path: "/avatars", pro: false },
+      { name: "Track Current Orders ", path: "/trackcurrentorder", pro: false },
     ],
   },
   {
