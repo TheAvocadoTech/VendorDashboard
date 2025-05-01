@@ -139,7 +139,7 @@ const PopulationProduct: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [tabValue, setTabValue] = useState<number>(0);
+  const [tabValue, ] = useState<number>(0);
   
   // Product form state
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -173,7 +173,7 @@ const PopulationProduct: React.FC = () => {
   });
 
   // File upload state
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  // const [setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
 
   // Load initial data
@@ -199,9 +199,9 @@ const PopulationProduct: React.FC = () => {
   }, []);
 
   // Handle tab change
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
-  };
+  // const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  //   setTabValue(newValue);
+  // };
 
   // Dialog handlers
   const openAddDialog = () => {
@@ -215,7 +215,7 @@ const PopulationProduct: React.FC = () => {
       isActive: true
     });
     setPreviewUrl('');
-    setSelectedFile(null);
+    // setSelectedFile(null);
     setIsEditing(false);
     setIsDialogOpen(true);
   };
@@ -223,7 +223,7 @@ const PopulationProduct: React.FC = () => {
   const openEditDialog = (product: Product) => {
     setCurrentProduct({ ...product });
     setPreviewUrl(product.imageUrl);
-    setSelectedFile(null);
+    // setSelectedFile(null);
     setIsEditing(true);
     setIsDialogOpen(true);
   };
@@ -233,13 +233,13 @@ const PopulationProduct: React.FC = () => {
   };
 
   // Form handlers
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
-    const { name, value } = e.target;
-    setCurrentProduct({
-      ...currentProduct,
-      [name as string]: value
-    });
-  };
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
+  //   const { name, value } = e.target;
+  //   setCurrentProduct({
+  //     ...currentProduct,
+  //     [name as string]: value
+  //   });
+  // };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
@@ -249,86 +249,86 @@ const PopulationProduct: React.FC = () => {
     });
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setSelectedFile(file);
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     const file = e.target.files[0];
+  //     // setSelectedFile(file);
       
       // Create a preview URL
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setPreviewUrl(reader.result as string);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
-  const handleSubmit = async () => {
-    try {
-      setLoading(true);
+  // const handleSubmit = async () => {
+  //   try {
+  //     setLoading(true);
       
-      // Validation
-      if (!currentProduct.name || !currentProduct.category || currentProduct.price <= 0) {
-        setSnackbar({
-          open: true,
-          message: 'Please fill all required fields.',
-          severity: 'error'
-        });
-        setLoading(false);
-        return;
-      }
+  //     // Validation
+  //     // if (!currentProduct.name || !currentProduct.category <= 0) {
+  //     //   setSnackbar({
+  //     //     open: true,
+  //     //     message: 'Please fill all required fields.',
+  //     //     severity: 'error'
+  //     //   });
+  //     //   setLoading(false);
+  //     //   return;
+  //     // }
 
-      // In a real application, you would upload the file and save the product to your API
-      // For now, we'll simulate the API call and update the local state
+  //     // In a real application, you would upload the file and save the product to your API
+  //     // For now, we'll simulate the API call and update the local state
       
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 800));
+  //     // Simulate API delay
+  //     await new Promise(resolve => setTimeout(resolve, 800));
       
-      if (isEditing && currentProduct._id) {
-        // Update existing product
-        const updatedProducts = products.map(product => 
-          product._id === currentProduct._id ? { 
-            ...currentProduct as Product, 
-            updatedAt: new Date().toISOString(),
-            imageUrl: previewUrl || currentProduct.imageUrl
-          } : product
-        );
+  //     // if (isEditing && currentProduct._id) {
+  //     //   // Update existing product
+  //     //   const updatedProducts = products.map(product => 
+  //     //     product._id === currentProduct._id ? { 
+  //     //       ...currentProduct as Product, 
+  //     //       updatedAt: new Date().toISOString(),
+  //     //       imageUrl: previewUrl || currentProduct.imageUrl
+  //     //     } : product
+  //     //   );
         
-        setProducts(updatedProducts);
-        setSnackbar({
-          open: true,
-          message: 'Product updated successfully!',
-          severity: 'success'
-        });
-      } else {
-        // Add new product
-        const newProduct: Product = {
-          _id: Date.now().toString(), // In a real app, this would come from the backend
-          ...currentProduct as Omit<Product, '_id' | 'createdAt' | 'updatedAt'>,
-          imageUrl: previewUrl || 'https://via.placeholder.com/150',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        };
+  //       // setProducts(updatedProducts);
+  //       setSnackbar({
+  //         open: true,
+  //         message: 'Product updated successfully!',
+  //         severity: 'success'
+  //       });
+  //     } else {
+  //       // Add new product
+  //       const newProduct: Product = {
+  //         _id: Date.now().toString(), // In a real app, this would come from the backend
+  //         ...currentProduct as Omit<Product, '_id' | 'createdAt' | 'updatedAt'>,
+  //         imageUrl: previewUrl || 'https://via.placeholder.com/150',
+  //         createdAt: new Date().toISOString(),
+  //         updatedAt: new Date().toISOString()
+  //       };
         
-        setProducts([...products, newProduct]);
-        setSnackbar({
-          open: true,
-          message: 'Product added successfully!',
-          severity: 'success'
-        });
-      }
+  //       setProducts([...products, newProduct]);
+  //       setSnackbar({
+  //         open: true,
+  //         message: 'Product added successfully!',
+  //         severity: 'success'
+  //       });
+  //     }
       
-      setLoading(false);
-      closeDialog();
-    } catch (err) {
-      setSnackbar({
-        open: true,
-        message: isEditing ? 'Failed to update product.' : 'Failed to add product.',
-        severity: 'error'
-      });
-      setLoading(false);
-    }
-  };
+  //     setLoading(false);
+  //     closeDialog();
+  //   } catch (err) {
+  //     setSnackbar({
+  //       open: true,
+  //       message: isEditing ? 'Failed to update product.' : 'Failed to add product.',
+  //       severity: 'error'
+  //     });
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleDeleteProduct = async (productId: string) => {
     try {
@@ -485,7 +485,7 @@ const PopulationProduct: React.FC = () => {
       {/* Tabs */}
       <Tabs 
         value={tabValue} 
-        onChange={handleTabChange} 
+        // onChange={handleTabChange} 
         sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}
       >
         <Tab label="Product List" />
@@ -515,7 +515,7 @@ const PopulationProduct: React.FC = () => {
               <Select
                 value={categoryFilter}
                 label="Category"
-                onChange={(e) => setCategoryFilter(e.target.value)}
+                // onChange={(e) => setCategoryFilter(e.target.value)}
               >
                 <MenuItem value="">All Categories</MenuItem>
                 {categories.map(category => (
@@ -531,7 +531,7 @@ const PopulationProduct: React.FC = () => {
               <Select
                 value={statusFilter}
                 label="Status"
-                onChange={(e) => setStatusFilter(e.target.value)}
+                // onChange={(e) => setStatusFilter(e.target.value)}
               >
                 <MenuItem value="all">All</MenuItem>
                 <MenuItem value="active">Active</MenuItem>
@@ -867,7 +867,7 @@ const PopulationProduct: React.FC = () => {
                 <Select
                   name="category"
                   value={currentProduct.category || ''}
-                  onChange={handleInputChange}
+                  // onChange={handleInputChange}
                   label="Category"
                 >
                   {categories.map(category => (
@@ -942,7 +942,7 @@ const PopulationProduct: React.FC = () => {
                         type="file"
                         accept="image/*"
                         hidden
-                        onChange={handleFileChange}
+                        // onChange={handleFileChange}
                       />
                     </Button>
                   </Box>
@@ -962,7 +962,7 @@ const PopulationProduct: React.FC = () => {
                         type="file"
                         accept="image/*"
                         hidden
-                        onChange={handleFileChange}
+                        // onChange={handleFileChange}
                       />
                     </Button>
                   </Box>

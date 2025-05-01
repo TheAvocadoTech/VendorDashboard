@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+// import axios from 'axios';
 
 // Interface for vendor data
 interface VendorDetails {
@@ -70,6 +70,8 @@ const dummyVendorData: VendorDetails = {
 
 // Main component
 const UpdateVendorDetails: React.FC = () => {
+
+
   const [vendorData, setVendorData] = useState<VendorDetails>(dummyVendorData);
   const [loading, setLoading] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>('basic');
@@ -99,48 +101,52 @@ const UpdateVendorDetails: React.FC = () => {
   }, []);
 
   // Handle input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+  // dleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  //   const { name, value } = e.target;
     
     // Handle nested properties
-    if (name.includes('.')) {
-      const [parent, child] = name.split('.');
-      setVendorData(prev => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent as keyof VendorDetails],
-          [child]: value
-        }
-      }));
-    } else {
-      setVendorData(prev => ({
-        ...prev,
-        [name]: value
-      }));
-    }
-  };
+    // if (name.includes('.')) {
+    //   const [parent, child] = name.split('.');
+    
+    //   // Ensure the parent exists and is an object before spreading
+    //   setVendorData(prev => ({
+    //     ...prev,
+    //     [parent]: {
+    //       ...(typeof prev[parent as keyof VendorDetails] === 'object' && prev[parent as keyof VendorDetails] !== null ? prev[parent as keyof VendorDetails] : {}), // Ensure it's an object before spreading
+    //       [child]: value
+    //     }
+    //   }));
+    // } else {
+    //   setVendorData(prev => ({
+    //     ...prev,
+    //     [name]: value
+    //   }));
+    // }
+    
 
   // Handle checkbox changes
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  //   const { name, value } = e.target;
     
-    if (name.includes('.')) {
-      const [parent, child] = name.split('.');
-      setVendorData(prev => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent as keyof VendorDetails],
-          [child]: checked
-        }
-      }));
-    } else {
-      setVendorData(prev => ({
-        ...prev,
-        [name]: checked
-      }));
-    }
-  };
-
+  //   // Handle nested properties
+  //   if (name.includes('.')) {
+  //     const [parent, child] = name.split('.');
+    
+  //     // Ensure the parent exists and is an object before spreading
+  //     setVendorData(prev => ({
+  //       ...prev,
+  //       [parent]: {
+  //         ...(typeof prev[parent as keyof VendorDetails] === 'object' && prev[parent as keyof VendorDetails] !== null ? prev[parent as keyof VendorDetails] : {}), // Ensure it's an object before spreading
+  //         [child]: value
+  //       }
+  //     }));
+  //   } else {
+  //     setVendorData(prev => ({
+  //       ...prev,
+  //       [name]: value
+  //     }));
+  //   }
+  // }; 
   // Handle opening hours changes
   const handleHoursChange = (day: string, field: string, value: string | boolean) => {
     setVendorData(prev => ({
@@ -226,7 +232,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="storeName"
                 name="storeName" 
                 value={vendorData.storeName} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 required 
               />
@@ -239,7 +245,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="ownerName"
                 name="ownerName" 
                 value={vendorData.ownerName} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 required 
               />
@@ -252,7 +258,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="email"
                 name="email" 
                 value={vendorData.email} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 required 
               />
@@ -265,7 +271,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="phone"
                 name="phone" 
                 value={vendorData.phone} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 required 
               />
@@ -277,7 +283,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="storeCategory"
                 name="storeCategory" 
                 value={vendorData.storeCategory} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 required
               >
@@ -299,7 +305,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="description"
                 name="description" 
                 value={vendorData.description} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 rows={4}
               />
@@ -317,7 +323,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="address.street"
                 name="address.street" 
                 value={vendorData.address.street} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 required 
               />
@@ -330,7 +336,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="address.city"
                 name="address.city" 
                 value={vendorData.address.city} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 required 
               />
@@ -343,7 +349,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="address.state"
                 name="address.state" 
                 value={vendorData.address.state} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 required 
               />
@@ -356,7 +362,7 @@ const UpdateVendorDetails: React.FC = () => {
                 id="address.postalCode"
                 name="address.postalCode" 
                 value={vendorData.address.postalCode} 
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 className="form-control" 
                 required 
               />
@@ -431,7 +437,7 @@ const UpdateVendorDetails: React.FC = () => {
                   type="checkbox" 
                   name="deliveryOptions.selfPickup" 
                   checked={vendorData.deliveryOptions.selfPickup} 
-                  onChange={handleCheckboxChange}
+                  // onChange={handleCheckboxChange}
                 />
                 <span className="checkbox-label">Allow Self Pickup</span>
               </label>
@@ -444,7 +450,7 @@ const UpdateVendorDetails: React.FC = () => {
                   type="checkbox" 
                   name="deliveryOptions.delivery" 
                   checked={vendorData.deliveryOptions.delivery} 
-                  onChange={handleCheckboxChange}
+                  // onChange={handleCheckboxChange}
                 />
                 <span className="checkbox-label">Offer Delivery</span>
               </label>
@@ -460,7 +466,7 @@ const UpdateVendorDetails: React.FC = () => {
                     id="deliveryOptions.maxDeliveryDistance"
                     name="deliveryOptions.maxDeliveryDistance" 
                     value={vendorData.deliveryOptions.maxDeliveryDistance} 
-                    onChange={handleInputChange}
+                    // onChange={handleInputChange}
                     className="form-control" 
                     min="0"
                     step="0.1"
@@ -474,7 +480,7 @@ const UpdateVendorDetails: React.FC = () => {
                     id="deliveryOptions.deliveryFee"
                     name="deliveryOptions.deliveryFee" 
                     value={vendorData.deliveryOptions.deliveryFee} 
-                    onChange={handleInputChange}
+                    // onChange={handleInputChange}
                     className="form-control" 
                     min="0"
                     step="0.01"
@@ -597,7 +603,7 @@ const UpdateVendorDetails: React.FC = () => {
         </form>
       </div>
       
-      <style jsx>{`
+      <style>{`
         .update-vendor-container {
           padding: 20px;
           max-width: 1200px;

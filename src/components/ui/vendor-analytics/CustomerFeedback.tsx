@@ -7,7 +7,7 @@ import {
   Paper,
   Rating,
   Avatar,
-  Divider,
+  // Divider,
   TextField,
   MenuItem,
   Select,
@@ -30,21 +30,21 @@ import {
   Snackbar
 } from '@mui/material';
 import {
-  Star,
-  StarBorder,
+  // Star,
+  // StarBorder,
   ThumbUp,
   ThumbDown,
-  Sort,
-  FilterList,
+  // Sort,
+  // FilterList,
   Search,
   Reply,
-  Delete,
-  Report,
-  Check,
+  // Delete,
+  // Report,
+  // Check,
   KeyboardArrowDown,
   KeyboardArrowUp,
-  MoreVert,
-  InsertChart
+  // MoreVert,
+  // InsertChart
 } from '@mui/icons-material';
 import {
   BarChart,
@@ -217,12 +217,12 @@ const generateMockStats = (feedbackItems: FeedbackItem[]): FeedbackStats => {
 };
 
 // Colors for charts
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28BF9'];
-const SENTIMENT_COLORS = {
-  Positive: '#00C49F',
-  Neutral: '#FFBB28',
-  Negative: '#FF4842'
-};
+// const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28BF9'];
+// const SENTIMENT_COLORS = {
+//   Positive: '#00C49F',
+//   Neutral: '#FFBB28',
+//   Negative: '#FF4842'
+// };
 
 const CustomerFeedback: React.FC = () => {
   // State management
@@ -237,7 +237,7 @@ const CustomerFeedback: React.FC = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage] = useState(10);
   
   // Filter states
   const [ratingFilter, setRatingFilter] = useState<number | ''>('');
@@ -922,7 +922,7 @@ const CustomerFeedback: React.FC = () => {
                     <Pagination 
                       count={Math.ceil(filteredFeedback.length / rowsPerPage)} 
                       page={page}
-                      onChange={(event, value) => setPage(value)}
+                      onChange={(value) => setPage(value)}
                       color="primary"
                     />
                   </Box>

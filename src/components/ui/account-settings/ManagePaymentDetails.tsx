@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, } from 'react';
 import { 
   Box, 
   Typography, 
@@ -129,8 +129,9 @@ const dummyPaymentHistory: PaymentHistoryItem[] = [
 
 // Months and Years for credit card expiry selection
 const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-const years = [];
+const years: string[] = [];
 const currentYear = new Date().getFullYear();
+
 for (let i = 0; i < 15; i++) {
   years.push((currentYear + i).toString());
 }
@@ -138,7 +139,7 @@ for (let i = 0; i < 15; i++) {
 const ManagePaymentDetails: React.FC = () => {
   // State
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>(dummyPaymentMethods);
-  const [paymentHistory, setPaymentHistory] = useState<PaymentHistoryItem[]>(dummyPaymentHistory);
+  const [paymentHistory,] = useState<PaymentHistoryItem[]>(dummyPaymentHistory);
   const [selectedTab, setSelectedTab] = useState<'methods' | 'history'>('methods');
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -194,7 +195,7 @@ const ManagePaymentDetails: React.FC = () => {
         name: method.name,
         cardNumber: `************${method.lastFour}`,
         expiryMonth: method.expiryDate?.split('/')[0] || months[0],
-        expiryYear: `20${method.expiryDate?.split('/')[1]}` || years[0],
+        expiryYear: method.expiryDate ? `20${method.expiryDate.split('/')[1]}` : years[0],
         cvv: '',
         bankName: '',
         accountNumber: '',
@@ -426,7 +427,7 @@ const ManagePaymentDetails: React.FC = () => {
   };
 
   // Returns appropriate icon for the card type
-  const getCardIcon = (type: string) => {
+  const getCardIcon = () => {
     // In a real application, you'd return different icons based on card type
     // For this example, we'll just use the CreditCardIcon for all
     return <CreditCardIcon />;
@@ -752,21 +753,21 @@ const ManagePaymentDetails: React.FC = () => {
                   </Typography>
                   <Box sx={{ display: 'flex' }}>
                     <FormControl variant="outlined" sx={{ width: '50%', mr: 1 }}>
-                      <Select
-                        name="expiryMonth"
-                        value={formData.expiryMonth}
-                        onChange={handleInputChange}
-                      >
-                        {months.map(month => (
-                          <MenuItem key={month} value={month}>{month}</MenuItem>
-                        ))}
-                      </Select>
+                    <Select
+  name="expiryMonth"
+  value={formData.expiryMonth}
+  // onChange={handleSelectChange} // Use the new function here
+>
+  {months.map(month => (
+    <MenuItem key={month} value={month}>{month}</MenuItem>
+  ))}
+</Select>
                     </FormControl>
                     <FormControl variant="outlined" sx={{ width: '50%' }}>
                       <Select
                         name="expiryYear"
                         value={formData.expiryYear}
-                        onChange={handleInputChange}
+                        // onChange={handleInputChange}
                       >
                         {years.map(year => (
                           <MenuItem key={year} value={year}>{year}</MenuItem>
@@ -897,7 +898,7 @@ const ManagePaymentDetails: React.FC = () => {
                       <Select
                         name="expiryMonth"
                         value={formData.expiryMonth}
-                        onChange={handleInputChange}
+                        // onChange={handleInputChange}
                       >
                         {months.map(month => (
                           <MenuItem key={month} value={month}>{month}</MenuItem>
@@ -908,11 +909,11 @@ const ManagePaymentDetails: React.FC = () => {
                       <Select
                         name="expiryYear"
                         value={formData.expiryYear}
-                        onChange={handleInputChange}
+                        // onChange={handleInputChange}
                       >
-                        {years.map(year => (
+                        {/* {years.map(year => (
                           <MenuItem key={year} value={year}>{year}</MenuItem>
-                        ))}
+                        ))} */}
                       </Select>
                     </FormControl>
                   </Box>

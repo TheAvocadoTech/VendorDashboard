@@ -314,9 +314,9 @@ const SalesPerformance: React.FC = () => {
                   dataKey="value"
                   label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                 >
-                  {dummySalesByCategory.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
+                 {dummySalesByCategory.map((_, index) => (
+  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+))}
                 </Pie>
                 <Tooltip formatter={(value) => [`${value}%`, 'Percentage']} />
                 <Legend />

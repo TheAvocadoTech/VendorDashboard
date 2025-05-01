@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiClock, FiSave, FiPlusCircle, FiTrash2 } from 'react-icons/fi';
-import axios from 'axios';
+
 import { toast } from 'react-toastify';
 
 interface TimeSlot {

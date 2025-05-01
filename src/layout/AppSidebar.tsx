@@ -8,7 +8,7 @@ import {
   GridIcon,
   HorizontaLDots,
   PieChartIcon,
-  PlugInIcon
+
 } from "../icons";
 import { useSidebar } from "../context/SidebarContext";
 import SidebarWidget from "./SidebarWidget";

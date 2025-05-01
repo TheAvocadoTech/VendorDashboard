@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 // Types
 interface Announcement {
@@ -169,7 +169,7 @@ const PlatformAnnouncement: React.FC = () => {
       message: announcement.message,
       type: announcement.type,
       audience: announcement.audience,
-      status: announcement.status,
+      // status: announcement.status,
       scheduledFor: announcement.scheduledFor,
       expiresAt: announcement.expiresAt
     });

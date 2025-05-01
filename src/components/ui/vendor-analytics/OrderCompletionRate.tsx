@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  LineChart, 
-  Line, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  Legend, 
-  ResponsiveContainer, 
-  BarChart, 
-  Bar 
-} from 'recharts';
+// import { 
+//   LineChart, 
+//   Line, 
+//   XAxis, 
+//   YAxis, 
+//   CartesianGrid, 
+//   Tooltip, 
+//   Legend, 
+//   ResponsiveContainer, 
+//   BarChart, 
+//   Bar 
+// } from 'recharts';
 import { 
   Calendar, 
   Filter, 
@@ -19,6 +19,8 @@ import {
   ArrowDown,
   RefreshCcw
 } from 'lucide-react';
+import LineChart from '../../../pages/Charts/LineChart';
+import { Bar } from 'recharts';
 
 // Types
 interface OrderCompletionData {
@@ -456,7 +458,7 @@ const OrderCompletionRate: React.FC = () => {
       {!isLoading && !error && data.length === 0 && (
         <div className="bg-white p-12 rounded-lg shadow-sm text-center">
           <div className="mb-4">
-            <LineChart size={48} className="mx-auto text-gray-400" />
+            <LineChar />
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">No order data available</h3>
           <p className="text-gray-500 mb-4">

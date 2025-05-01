@@ -51,7 +51,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-const StatusChip = styled(Chip)(({ theme }) => ({
+const StatusChip = styled(Chip)(({  }) => ({
   fontWeight: 600,
   textTransform: 'uppercase',
   fontSize: '0.7rem'

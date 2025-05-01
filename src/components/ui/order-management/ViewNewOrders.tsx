@@ -11,7 +11,7 @@ import {
   DialogContent, 
   DialogContentText, 
   DialogTitle, 
-  Divider, 
+  // Divider, 
   Grid, 
   IconButton, 
   Paper, 
@@ -30,12 +30,12 @@ import {
   AccessTime, 
   CheckCircle, 
   Close, 
-  Details, 
-  Done, 
+  // Details, 
+  // Done, 
   FilterList, 
   Info, 
   Refresh, 
-  Search, 
+  // Search, 
   ShoppingBasket 
 } from '@mui/icons-material';
 
@@ -259,9 +259,9 @@ const ViewNewOrders: React.FC = () => {
   }, []);
 
   // Pagination handlers
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
+  // const handleChangePage = (event: unknown, newPage: number) => {
+  //   setPage(newPage);
+  // };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
