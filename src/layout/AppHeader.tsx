@@ -84,16 +84,19 @@ const AppHeader: React.FC = () => {
           </button>
 
           <Link to="/" className="lg:hidden">
-            <img
-              className="dark:hidden"
-              src="./images/logo/logo.svg"
-              alt="Logo"
-            />
-            <img
+          <img
+  className="dark:hidden"
+  src="/images/logo/minitos-White.png"
+  alt="Logo"
+  width={150}
+  height={40}
+  style={{ filter: 'invert(23%) sepia(97%) saturate(7495%) hue-rotate(-1deg) brightness(104%) contrast(101%)' }}
+/>
+            {/* <img
               className="hidden dark:block"
-              src="./images/logo/logo-dark.svg"
+              src="./images/logo/minitos-White.png"
               alt="Logo"
-            />
+            /> */}
           </Link>
 
           <button

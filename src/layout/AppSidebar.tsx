@@ -312,16 +312,19 @@ const AppSidebar: React.FC = () => {
         <Link to="/">
           {isExpanded || isHovered || isMobileOpen ? (
             <>
-              <img
-                className="dark:hidden"
-                src="/images/logo/logo.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
+<img
+  className="dark:hidden"
+  src="/images/logo/minitos-White.png"
+  alt="Logo"
+  width={150}
+  height={40}
+  style={{ filter: 'invert(23%) sepia(97%) saturate(7495%) hue-rotate(-1deg) brightness(104%) contrast(101%)' }}
+/>
+
+
               <img
                 className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
+                src="/images/logo/minitos-White.png"
                 alt="Logo"
                 width={150}
                 height={40}
@@ -329,7 +332,7 @@ const AppSidebar: React.FC = () => {
             </>
           ) : (
             <img
-              src="/images/logo/logo-icon.svg"
+              src="/images/logo/minitos-White.png"
               alt="Logo"
               width={32}
               height={32}
