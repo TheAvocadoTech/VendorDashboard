@@ -324,9 +324,10 @@ const SupportRequest: React.FC = () => {
     setFilterDialogOpen(false);
   };
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
-  };
+  // const handleTabChange = (event: any, newValue: number) => {
+  //   setTabValue(newValue);
+  // };
+
 
   const handleViewRequest = (request: SupportRequest) => {
     setSelectedRequest(request);
@@ -461,7 +462,7 @@ const SupportRequest: React.FC = () => {
       <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
         <Tabs 
           value={tabValue} 
-          onChange={handleTabChange} 
+          // onChange={handleTabChange} 
           variant="scrollable"
           scrollButtons="auto"
         >
