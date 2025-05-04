@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
 
 // Types
 interface Announcement {
@@ -60,10 +59,6 @@ const PlatformAnnouncement: React.FC = () => {
   const fetchAnnouncements = async () => {
     setIsLoading(true);
     try {
-      // This would be replaced with actual API call
-      // const response = await axios.get('/api/announcements');
-      // setAnnouncements(response.data);
-      
       // Using dummy data for now
       setAnnouncements(dummyAnnouncements);
       setError(null);
@@ -89,10 +84,6 @@ const PlatformAnnouncement: React.FC = () => {
     try {
       if (isEditing && currentAnnouncement) {
         // Update existing announcement
-        // In production, replace with actual API call
-        // await axios.put(`/api/announcements/${currentAnnouncement._id}`, formData);
-        
-        // Update local state for demonstration
         const updatedAnnouncements = announcements.map(announcement => 
           announcement._id === currentAnnouncement._id 
             ? { 
@@ -110,10 +101,6 @@ const PlatformAnnouncement: React.FC = () => {
         setAnnouncements(updatedAnnouncements);
       } else {
         // Create new announcement
-        // In production, replace with actual API call
-        // const response = await axios.post('/api/announcements', formData);
-        
-        // Add to local state for demonstration
         const newAnnouncement: Announcement = {
           _id: `dummy-${Date.now()}`,
           title: formData.title,
@@ -149,9 +136,6 @@ const PlatformAnnouncement: React.FC = () => {
     
     setIsLoading(true);
     try {
-      // In production, replace with actual API call
-      // await axios.delete(`/api/announcements/${id}`);
-      
       // Update local state
       setAnnouncements(announcements.filter(announcement => announcement._id !== id));
     } catch (err) {
@@ -169,7 +153,7 @@ const PlatformAnnouncement: React.FC = () => {
       message: announcement.message,
       type: announcement.type,
       audience: announcement.audience,
-      // status: announcement.status,
+      status: announcement.status === 'scheduled' ? 'scheduled' : 'active',
       scheduledFor: announcement.scheduledFor,
       expiresAt: announcement.expiresAt
     });

@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useState } from 'react';
 import { 
   Box, 
   Typography, 
@@ -22,11 +22,10 @@ import {
   Alert,
   IconButton,
   Divider,
-  CircularProgress
+  CircularProgress,
+  SelectChangeEvent
 } from '@mui/material';
 import { 
-  CreditCard as CreditCardIcon, 
-  AccountBalance as BankIcon, 
   Add as AddIcon, 
   Edit as EditIcon, 
   Delete as DeleteIcon,
@@ -139,7 +138,7 @@ for (let i = 0; i < 15; i++) {
 const ManagePaymentDetails: React.FC = () => {
   // State
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>(dummyPaymentMethods);
-  const [paymentHistory,] = useState<PaymentHistoryItem[]>(dummyPaymentHistory);
+  const [paymentHistory] = useState<PaymentHistoryItem[]>(dummyPaymentHistory);
   const [selectedTab, setSelectedTab] = useState<'methods' | 'history'>('methods');
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -230,11 +229,19 @@ const ManagePaymentDetails: React.FC = () => {
     setOpenDeleteDialog(false);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name as string]: value
+      [name]: value
+    });
+  };
+
+  const handleSelectChange = (e: SelectChangeEvent<string>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
     });
   };
 
@@ -348,12 +355,12 @@ const ManagePaymentDetails: React.FC = () => {
       }
 
       // If this is set as default, update other methods
-      let updatedMethods = paymentMethods.map(method => 
-        method.id === currentMethod.id ? updatedMethod : 
-        formData.isDefault ? { ...method, isDefault: false } : method
-      );
+      // let updatedMethods = paymentMethods.map(method => 
+      //   method.id === currentMethod.id ? updatedMethod : 
+      //   formData.isDefault ? { ...method, isDefault: false } : method
+      // );
 
-      setPaymentMethods(updatedMethods);
+      // setPaymentMethods(updatedMethods);
       handleCloseDialogs();
       showSnackbar('Payment method updated successfully', 'success');
       setLoading(false);
@@ -424,13 +431,6 @@ const ManagePaymentDetails: React.FC = () => {
     if (/^6(?:011|5)/.test(number)) return 'discover';
     
     return 'unknown';
-  };
-
-  // Returns appropriate icon for the card type
-  const getCardIcon = () => {
-    // In a real application, you'd return different icons based on card type
-    // For this example, we'll just use the CreditCardIcon for all
-    return <CreditCardIcon />;
   };
 
   // Format a date string
@@ -531,11 +531,6 @@ const ManagePaymentDetails: React.FC = () => {
                     )}
                     <CardContent>
                       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                        {method.type === 'card' ? (
-                          getCardIcon(method.cardType || 'unknown')
-                        ) : (
-                          <BankIcon />
-                        )}
                         <Typography variant="h6" sx={{ ml: 1 }}>
                           {method.name}
                         </Typography>
@@ -753,21 +748,21 @@ const ManagePaymentDetails: React.FC = () => {
                   </Typography>
                   <Box sx={{ display: 'flex' }}>
                     <FormControl variant="outlined" sx={{ width: '50%', mr: 1 }}>
-                    <Select
-  name="expiryMonth"
-  value={formData.expiryMonth}
-  // onChange={handleSelectChange} // Use the new function here
->
-  {months.map(month => (
-    <MenuItem key={month} value={month}>{month}</MenuItem>
-  ))}
-</Select>
+                      <Select
+                        name="expiryMonth"
+                        value={formData.expiryMonth}
+                        onChange={handleSelectChange}
+                      >
+                        {months.map(month => (
+                          <MenuItem key={month} value={month}>{month}</MenuItem>
+                        ))}
+                      </Select>
                     </FormControl>
                     <FormControl variant="outlined" sx={{ width: '50%' }}>
                       <Select
                         name="expiryYear"
                         value={formData.expiryYear}
-                        // onChange={handleInputChange}
+                        onChange={handleSelectChange}
                       >
                         {years.map(year => (
                           <MenuItem key={year} value={year}>{year}</MenuItem>
@@ -898,7 +893,7 @@ const ManagePaymentDetails: React.FC = () => {
                       <Select
                         name="expiryMonth"
                         value={formData.expiryMonth}
-                        // onChange={handleInputChange}
+                        onChange={handleSelectChange}
                       >
                         {months.map(month => (
                           <MenuItem key={month} value={month}>{month}</MenuItem>
@@ -909,11 +904,11 @@ const ManagePaymentDetails: React.FC = () => {
                       <Select
                         name="expiryYear"
                         value={formData.expiryYear}
-                        // onChange={handleInputChange}
+                        onChange={handleSelectChange}
                       >
-                        {/* {years.map(year => (
+                        {years.map(year => (
                           <MenuItem key={year} value={year}>{year}</MenuItem>
-                        ))} */}
+                        ))}
                       </Select>
                     </FormControl>
                   </Box>

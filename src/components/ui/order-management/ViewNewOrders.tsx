@@ -21,7 +21,7 @@ import {
   TableCell, 
   TableContainer, 
   TableHead, 
-  TablePagination, 
+  // TablePagination, 
   TableRow, 
   Tooltip, 
   Typography 
@@ -226,8 +226,8 @@ const ViewNewOrders: React.FC = () => {
   // State management
   const [orders, setOrders] = useState<Order[]>(dummyOrders);
   const [loading, setLoading] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const [page] = useState<number>(0);
+  const [rowsPerPage ] = useState<number>(5);
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState<boolean>(false);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
@@ -263,10 +263,10 @@ const ViewNewOrders: React.FC = () => {
   //   setPage(newPage);
   // };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setRowsPerPage(parseInt(event.target.value, 10));
+  //   setPage(0);
+  // };
 
   // Handle viewing order details
   const handleViewDetails = (order: Order) => {
@@ -570,15 +570,15 @@ const ViewNewOrders: React.FC = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-            <TablePagination
+            {/* <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={orders.length}
               rowsPerPage={rowsPerPage}
               page={page}
-              onPageChange={handleChangePage}
+              // onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
-            />
+            /> */}
           </>
         )}
       </Paper>

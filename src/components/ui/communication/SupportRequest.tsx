@@ -6,10 +6,8 @@ import {
   Table, 
   TableBody, 
   TableCell, 
-  TableContainer, 
   TableHead, 
   TableRow, 
-  TablePagination,
   Chip,
   IconButton,
   Button,
@@ -34,7 +32,6 @@ import {
   Visibility as VisibilityIcon,
   Reply as ReplyIcon,
   Close as CloseIcon,
-  Delete as DeleteIcon,
   Refresh as RefreshIcon
 } from '@mui/icons-material';
 
@@ -233,8 +230,8 @@ const dummySupportRequests: SupportRequest[] = [
 const SupportRequest: React.FC = () => {
   const [supportRequests, setSupportRequests] = useState<SupportRequest[]>(dummySupportRequests);
   const [filteredRequests, setFilteredRequests] = useState<SupportRequest[]>(dummySupportRequests);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page] = useState(0);
+  const [rowsPerPage] = useState(5);
   const [selectedRequest, setSelectedRequest] = useState<SupportRequest | null>(null);
   const [viewDialogOpen, setViewDialogOpen] = useState(false);
   const [replyDialogOpen, setReplyDialogOpen] = useState(false);
@@ -325,15 +322,6 @@ const SupportRequest: React.FC = () => {
     setCategoryFilter('all');
     setDateRangeFilter({ from: '', to: '' });
     setFilterDialogOpen(false);
-  };
-
-  // const handleChangePage = (event: unknown, newPage: number) => {
-  //   setPage(newPage);
-  // };
-
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
   };
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -517,7 +505,7 @@ const SupportRequest: React.FC = () => {
       </Box>
 
       {/* Support requests table */}
-      <TableContainer component={Paper} sx={{ mb: 4 }}>
+      <Paper>
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>
@@ -555,14 +543,14 @@ const SupportRequest: React.FC = () => {
                     <TableCell>
                       <Chip 
                         label={request.status.charAt(0).toUpperCase() + request.status.slice(1).replace('-', ' ')} 
-                        color={getStatusColor(request.status) as any}
+                        color={getStatusColor(request.status)}
                         size="small"
                       />
                     </TableCell>
                     <TableCell>
                       <Chip 
                         label={request.priority.charAt(0).toUpperCase() + request.priority.slice(1)} 
-                        color={getPriorityColor(request.priority) as any}
+                        color={getPriorityColor(request.priority)}
                         size="small"
                       />
                     </TableCell>
@@ -602,16 +590,7 @@ const SupportRequest: React.FC = () => {
             )}
           </TableBody>
         </Table>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={filteredRequests.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </TableContainer>
+      </Paper>
 
       {/* View Support Request Dialog */}
       <Dialog
@@ -709,7 +688,7 @@ const SupportRequest: React.FC = () => {
                       <Typography variant="subtitle2">Status</Typography>
                       <Chip 
                         label={selectedRequest.status.charAt(0).toUpperCase() + selectedRequest.status.slice(1).replace('-', ' ')} 
-                        color={getStatusColor(selectedRequest.status) as any}
+                        color={getStatusColor(selectedRequest.status)}
                         size="small"
                       />
                     </Box>
@@ -718,7 +697,7 @@ const SupportRequest: React.FC = () => {
                       <Typography variant="subtitle2">Priority</Typography>
                       <Chip 
                         label={selectedRequest.priority.charAt(0).toUpperCase() + selectedRequest.priority.slice(1)} 
-                        color={getPriorityColor(selectedRequest.priority) as any}
+                        color={getPriorityColor(selectedRequest.priority)}
                         size="small"
                       />
                     </Box>

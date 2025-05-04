@@ -400,9 +400,9 @@ const TrackCurrentOrders: React.FC = () => {
     setDetailsOpen(false);
   };
 
-  const handleStatusChange = (e: React.SyntheticEvent, newValue: string) => {
-    setStatusFilter(newValue);
-  };
+  // const handleStatusChange = (e: React.SyntheticEvent, newValue: string) => {
+  //   setStatusFilter(newValue);
+  // };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -545,7 +545,7 @@ const TrackCurrentOrders: React.FC = () => {
       {/* Status Tabs */}
       <Tabs
         value={statusFilter}
-        onChange={handleStatusChange}
+        // onChange={handleStatusChange}
         variant="scrollable"
         scrollButtons="auto"
         sx={{ mb: 3, borderBottom: 1, borderColor: 'divider' }}
