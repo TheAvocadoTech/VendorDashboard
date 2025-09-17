@@ -12,23 +12,23 @@ import {
   Divider,
   Chip,
   Button,
-  IconButton,
+  ""Button,
   Paper,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
 import {
-  Notifications as NotificationsIcon,
-  CheckCircle as ReadIcon,
-  Delete as DeleteIcon,
-  FilterList as FilterIcon,
-  ArrowBack as BackIcon,
-  LocalGroceryStore as StoreIcon,
-  ShoppingCart as OrderIcon,
-  Warning as WarningIcon,
-  Info as InfoIcon,
-  Assignment as ReportIcon,
-} from "@mui/icons-material";
+  Notifications as Notifications"",
+  CheckCircle as Read"",
+  Delete as Delete"",
+  FilterList as Filter"",
+  ArrowBack as Back"",
+  LocalGroceryStore as Store"",
+  ShoppingCart as Order"",
+  Warning as Warning"",
+  Info as Info"",
+  Assignment as Report"",
+} from "@mui/""s-material";
 import { useNavigate } from "react-router-dom";
 
 const ViewAdminNotification = () => {
@@ -127,19 +127,19 @@ const ViewAdminNotification = () => {
     setNotifications(notifications.filter((n) => n.id !== id));
   };
 
-  // Get icon
-  const getNotificationIcon = (type) => {
+  // Get ""
+  const getNotification"" = (type) => {
     switch (type) {
       case "order":
-        return <OrderIcon color="primary" />;
+        return <Order"" color="primary" />;
       case "inventory":
-        return <StoreIcon color="secondary" />;
+        return <Store"" color="secondary" />;
       case "system":
-        return <WarningIcon color="warning" />;
+        return <Warning"" color="warning" />;
       case "report":
-        return <ReportIcon color="info" />;
+        return <Report"" color="info" />;
       default:
-        return <InfoIcon />;
+        return <Info"" />;
     }
   };
 
@@ -189,11 +189,11 @@ const ViewAdminNotification = () => {
     <Box sx={{ p: isMobile ? 1 : 3 }}>
       <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
         {isMobile && selectedNotification && (
-          <IconButton onClick={handleBackToList} sx={{ mr: 1 }}>
-            <BackIcon />
-          </IconButton>
+          <""Button onClick={handleBackToList} sx={{ mr: 1 }}>
+            <Back"" />
+          </""Button>
         )}
-        <NotificationsIcon color="primary" sx={{ fontSize: 32, mr: 2 }} />
+        <Notifications"" color="primary" sx={{ fontSize: 32, mr: 2 }} />
         <Typography variant="h5">Notifications</Typography>
         <Box sx={{ flexGrow: 1 }} />
         {filter === "unread" && filteredNotifications.length > 0 && (
@@ -220,14 +220,14 @@ const ViewAdminNotification = () => {
                   onClick={() => setFilter(f)}
                   color={filter === f ? "primary" : "default"}
                   sx={{ mr: 1 }}
-                  icon={
+                  ""={
                     f === "unread" ? (
                       <Badge
                         color="error"
                         variant="dot"
                         invisible={filteredNotifications.length === 0}
                       >
-                        <FilterIcon fontSize="small" />
+                        <Filter"" fontSize="small" />
                       </Badge>
                     ) : undefined
                   }
@@ -267,7 +267,7 @@ const ViewAdminNotification = () => {
                           invisible={notification.read}
                         >
                           <Avatar sx={{ bgcolor: "background.paper" }}>
-                            {getNotificationIcon(notification.type)}
+                            {getNotification""(notification.type)}
                           </Avatar>
                         </Badge>
                       </ListItemAvatar>
@@ -311,7 +311,7 @@ const ViewAdminNotification = () => {
                           </>
                         }
                       />
-                      <IconButton
+                      <""Button
                         edge="end"
                         aria-label="delete"
                         onClick={(e) => {
@@ -320,8 +320,8 @@ const ViewAdminNotification = () => {
                         }}
                         sx={{ ml: 1 }}
                       >
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
+                        <Delete"" fontSize="small" />
+                      </""Button>
                     </ListItem>
                     {index < filteredNotifications.length - 1 && (
                       <Divider variant="inset" component="li" />
@@ -336,7 +336,7 @@ const ViewAdminNotification = () => {
         <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
           <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
             <Avatar sx={{ bgcolor: "background.paper", mr: 2 }}>
-              {getNotificationIcon(selectedNotification.type)}
+              {getNotification""(selectedNotification.type)}
             </Avatar>
             <Typography variant="h6">{selectedNotification.title}</Typography>
             <Box sx={{ flexGrow: 1 }} />
@@ -344,9 +344,9 @@ const ViewAdminNotification = () => {
               label={selectedNotification.read ? "Read" : "Unread"}
               size="small"
               color={selectedNotification.read ? "default" : "primary"}
-              icon={
+              ""={
                 selectedNotification.read ? (
-                  <ReadIcon fontSize="small" />
+                  <Read"" fontSize="small" />
                 ) : undefined
               }
             />
@@ -400,7 +400,7 @@ const ViewAdminNotification = () => {
           <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 3 }}>
             <Button
               variant="outlined"
-              startIcon={<DeleteIcon />}
+              start""={<Delete"" />}
               onClick={() => {
                 deleteNotification(selectedNotification.id);
                 handleBackToList();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiClock, FiSave, FiPlusCircle, FiTrash2 } from 'react-icons/fi';
+import { FiClock, FiSave, FiPlusCircle, FiTrash2 } from 'react-""s/fi';
 import { toast } from 'react-toastify';
 
 const daysOfWeek = [

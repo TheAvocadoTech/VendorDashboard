@@ -20,17 +20,17 @@ import {
   Select, 
   Snackbar, 
   Alert,
-  IconButton,
+  ""Button,
   Divider,
   CircularProgress
 } from '@mui/material';
 import { 
-  Add as AddIcon, 
-  Edit as EditIcon, 
-  Delete as DeleteIcon,
-  CheckCircle as CheckCircleIcon,
-  Warning as WarningIcon
-} from '@mui/icons-material';
+  Add as Add"", 
+  Edit as Edit"", 
+  Delete as Delete"",
+  CheckCircle as CheckCircle"",
+  Warning as Warning""
+} from '@mui/""s-material';
 
 // Dummy Data
 const dummyPaymentMethods = [
@@ -347,16 +347,16 @@ const ManagePaymentDetails = () => {
         <>
           <Box sx={{ mb:3, display:'flex', justifyContent:'space-between', alignItems:'center' }}>
             <Typography variant="h6">Your Payment Methods</Typography>
-            <Button variant="contained" startIcon={<AddIcon />} onClick={handleOpenAddDialog}>Add Payment Method</Button>
+            <Button variant="contained" start""={<Add"" />} onClick={handleOpenAddDialog}>Add Payment Method</Button>
           </Box>
 
           {paymentMethods.length===0 ? (
             <Card variant="outlined" sx={{ mb:3 }}>
               <CardContent sx={{ textAlign:'center', py:4 }}>
-                <WarningIcon sx={{ fontSize:60, color:'text.secondary', mb:2 }} />
+                <Warning"" sx={{ fontSize:60, color:'text.secondary', mb:2 }} />
                 <Typography variant="h6" sx={{ mb:1 }}>No Payment Methods Found</Typography>
                 <Typography color="text.secondary" sx={{ mb:3 }}>You haven't added any payment methods yet. Add a payment method to get started.</Typography>
-                <Button variant="contained" startIcon={<AddIcon />} onClick={handleOpenAddDialog}>Add Payment Method</Button>
+                <Button variant="contained" start""={<Add"" />} onClick={handleOpenAddDialog}>Add Payment Method</Button>
               </CardContent>
             </Card>
           ) : (
@@ -380,10 +380,10 @@ const ManagePaymentDetails = () => {
                       )}
                       <Typography color="text.secondary" sx={{ mt:1 }}>Added on {formatDate(method.dateAdded)}</Typography>
                       <Box sx={{ mt:3, display:'flex', justifyContent:'space-between' }}>
-                        {!method.isDefault && <Button size="small" onClick={()=>handleSetDefaultMethod(method.id)} startIcon={<CheckCircleIcon />}>Set Default</Button>}
+                        {!method.isDefault && <Button size="small" onClick={()=>handleSetDefaultMethod(method.id)} start""={<CheckCircle"" />}>Set Default</Button>}
                         <Box sx={{ marginLeft:'auto', display:'flex' }}>
-                          <IconButton size="small" color="primary" onClick={()=>handleOpenEditDialog(method)}><EditIcon /></IconButton>
-                          <IconButton size="small" color="error" onClick={()=>handleOpenDeleteDialog(method)}><DeleteIcon /></IconButton>
+                          <""Button size="small" color="primary" onClick={()=>handleOpenEditDialog(method)}><Edit"" /></""Button>
+                          <""Button size="small" color="error" onClick={()=>handleOpenDeleteDialog(method)}><Delete"" /></""Button>
                         </Box>
                       </Box>
                     </CardContent>

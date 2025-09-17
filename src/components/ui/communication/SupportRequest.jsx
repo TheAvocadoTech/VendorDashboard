@@ -10,7 +10,7 @@ import {
   TableHead,
   TableRow,
   Chip,
-  IconButton,
+  ""Button,
   Button,
   Dialog,
   DialogTitle,
@@ -24,13 +24,13 @@ import {
   Tooltip,
 } from "@mui/material";
 import {
-  Search as SearchIcon,
-  FilterList as FilterListIcon,
-  Visibility as VisibilityIcon,
-  Reply as ReplyIcon,
-  Close as CloseIcon,
-  Refresh as RefreshIcon,
-} from "@mui/icons-material";
+  Search as Search"",
+  FilterList as FilterList"",
+  Visibility as Visibility"",
+  Reply as Reply"",
+  Close as Close"",
+  Refresh as Refresh"",
+} from "@mui/""s-material";
 
 // Dummy data
 const dummySupportRequests = [
@@ -268,7 +268,7 @@ const SupportRequest = () => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon />
+              <Search"" />
             </InputAdornment>
           ),
         }}
@@ -309,14 +309,14 @@ const SupportRequest = () => {
                 <TableCell>{formatDate(request.updatedAt)}</TableCell>
                 <TableCell align="right">
                   <Tooltip title="View">
-                    <IconButton onClick={() => handleViewRequest(request)}>
-                      <VisibilityIcon />
-                    </IconButton>
+                    <""Button onClick={() => handleViewRequest(request)}>
+                      <Visibility"" />
+                    </""Button>
                   </Tooltip>
                   <Tooltip title="Reply">
-                    <IconButton onClick={() => handleReplyOpen(request)}>
-                      <ReplyIcon />
-                    </IconButton>
+                    <""Button onClick={() => handleReplyOpen(request)}>
+                      <Reply"" />
+                    </""Button>
                   </Tooltip>
                 </TableCell>
               </TableRow>

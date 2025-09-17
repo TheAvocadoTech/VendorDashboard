@@ -11,7 +11,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  IconButton,
+  ""Button,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -28,14 +28,14 @@ import {
   Chip
 } from '@mui/material';
 import {
-  Add as AddIcon,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
-  Search as SearchIcon,
-  ArrowUpward as ArrowUpwardIcon,
-  Image as ImageIcon,
-  CloudUpload as CloudUploadIcon
-} from '@mui/icons-material';
+  Add as Add"",
+  Edit as Edit"",
+  Delete as Delete"",
+  Search as Search"",
+  ArrowUpward as ArrowUpward"",
+  Image as Image"",
+  CloudUpload as CloudUpload""
+} from '@mui/""s-material';
 
 const PopulationProduct = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -85,7 +85,7 @@ const PopulationProduct = () => {
         {
           variant: 'contained',
           color: 'primary',
-          startIcon: React.createElement(AddIcon, null),
+          start"": React.createElement(Add"", null),
           onClick: () => setIsDialogOpen(true)
         },
         'Add Product'
@@ -115,7 +115,7 @@ const PopulationProduct = () => {
             value: searchTerm,
             onChange: (e) => setSearchTerm(e.target.value),
             InputProps: {
-              startAdornment: React.createElement(SearchIcon, { fontSize: 'small', sx: { mr: 1 } })
+              startAdornment: React.createElement(Search"", { fontSize: 'small', sx: { mr: 1 } })
             },
             sx: { flexGrow: 1, minWidth: '200px' }
           }),
@@ -166,7 +166,7 @@ const PopulationProduct = () => {
                     Box,
                     { sx: { display: 'flex', alignItems: 'center' } },
                     'Product Name',
-                    React.createElement(ArrowUpwardIcon, { fontSize: 'small' })
+                    React.createElement(ArrowUpward"", { fontSize: 'small' })
                   )
                 ),
                 React.createElement(TableCell, { sx: { cursor: 'pointer' } }, 'Price'),
@@ -227,19 +227,19 @@ const PopulationProduct = () => {
                       Box,
                       { sx: { display: 'flex', gap: 1 } },
                       React.createElement(
-                        IconButton,
+                        ""Button,
                         { size: 'small', color: 'primary' },
-                        React.createElement(EditIcon, { fontSize: 'small' })
+                        React.createElement(Edit"", { fontSize: 'small' })
                       ),
                       React.createElement(
-                        IconButton,
+                        ""Button,
                         { size: 'small', color: 'warning' },
                         React.createElement(Chip, { label: 'Deactivate', size: 'small', color: 'warning' })
                       ),
                       React.createElement(
-                        IconButton,
+                        ""Button,
                         { size: 'small', color: 'error' },
-                        React.createElement(DeleteIcon, { fontSize: 'small' })
+                        React.createElement(Delete"", { fontSize: 'small' })
                       )
                     )
                   )

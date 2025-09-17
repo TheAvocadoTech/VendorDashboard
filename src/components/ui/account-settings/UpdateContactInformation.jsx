@@ -14,11 +14,11 @@ import {
   CircularProgress,
   Avatar
 } from '@mui/material';
-import StorefrontIcon from '@mui/icons-material/Storefront';
-import PhoneIcon from '@mui/icons-material/Phone';
-import EmailIcon from '@mui/icons-material/Email';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import SaveIcon from '@mui/icons-material/Save';
+import Storefront"" from '@mui/""s-material/Storefront';
+import Phone"" from '@mui/""s-material/Phone';
+import Email"" from '@mui/""s-material/Email';
+import LocationOn"" from '@mui/""s-material/LocationOn';
+import Save"" from '@mui/""s-material/Save';
 
 // Mock vendor data - replace with actual API call in production
 const MOCK_VENDOR_DATA = {
@@ -187,7 +187,7 @@ const UpdateContactInformation = () => {
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" textAlign="center" mb={2}>
                     <Avatar sx={{ width: 120, height: 120, mb: 2, bgcolor: 'primary.main' }}>
-                      <StorefrontIcon sx={{ fontSize: 60 }} />
+                      <Storefront"" sx={{ fontSize: 60 }} />
                     </Avatar>
                     <Typography variant="h6" fontWeight="bold">{formData.storeName}</Typography>
                     <Typography variant="body2" color="textSecondary">
@@ -199,15 +199,15 @@ const UpdateContactInformation = () => {
 
                   <Box>
                     <Box display="flex" alignItems="center" mb={1.5}>
-                      <PhoneIcon sx={{ mr: 1, color: 'primary.main' }} />
+                      <Phone"" sx={{ mr: 1, color: 'primary.main' }} />
                       <Typography variant="body2">{formData.phone}</Typography>
                     </Box>
                     <Box display="flex" alignItems="center" mb={1.5}>
-                      <EmailIcon sx={{ mr: 1, color: 'primary.main' }} />
+                      <Email"" sx={{ mr: 1, color: 'primary.main' }} />
                       <Typography variant="body2" sx={{ wordBreak: 'break-all' }}>{formData.email}</Typography>
                     </Box>
                     <Box display="flex" alignItems="flex-start" mb={1.5}>
-                      <LocationOnIcon sx={{ mr: 1, color: 'primary.main', mt: 0.5 }} />
+                      <LocationOn"" sx={{ mr: 1, color: 'primary.main', mt: 0.5 }} />
                       <Typography variant="body2">
                         {formData.address}, {formData.city}, {formData.state} {formData.zipCode}
                       </Typography>
@@ -271,7 +271,7 @@ const UpdateContactInformation = () => {
                   </Grid>
 
                   <Box mt={4} display="flex" justifyContent="flex-end">
-                    <Button variant="contained" color="primary" size="large" type="submit" disabled={saving} startIcon={saving ? <CircularProgress size={20} /> : <SaveIcon />}>
+                    <Button variant="contained" color="primary" size="large" type="submit" disabled={saving} start""={saving ? <CircularProgress size={20} /> : <Save"" />}>
                       {saving ? 'Saving...' : 'Save Changes'}
                     </Button>
                   </Box>

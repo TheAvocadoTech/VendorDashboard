@@ -1,6 +1,6 @@
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import Badge from "../../components/ui/badge/Badge";
-import { PlusIcon } from "../../icons";
+import { Plus"" } from "../../""s";
 import PageMeta from "../../components/common/PageMeta";
 import ComponentCard from "../../components/common/ComponentCard";
 
@@ -65,102 +65,102 @@ export default function Badges() {
             </Badge>
           </div>
         </ComponentCard>
-        <ComponentCard title="Light Background with Left Icon">
+        <ComponentCard title="Light Background with Left """>
           <div className="flex flex-wrap gap-4 sm:items-center sm:justify-center">
-            <Badge variant="light" color="primary" startIcon={<PlusIcon />}>
+            <Badge variant="light" color="primary" start""={<Plus"" />}>
               Primary
             </Badge>
-            <Badge variant="light" color="success" startIcon={<PlusIcon />}>
+            <Badge variant="light" color="success" start""={<Plus"" />}>
               Success
             </Badge>{" "}
-            <Badge variant="light" color="error" startIcon={<PlusIcon />}>
+            <Badge variant="light" color="error" start""={<Plus"" />}>
               Error
             </Badge>{" "}
-            <Badge variant="light" color="warning" startIcon={<PlusIcon />}>
+            <Badge variant="light" color="warning" start""={<Plus"" />}>
               Warning
             </Badge>{" "}
-            <Badge variant="light" color="info" startIcon={<PlusIcon />}>
+            <Badge variant="light" color="info" start""={<Plus"" />}>
               Info
             </Badge>
-            <Badge variant="light" color="light" startIcon={<PlusIcon />}>
+            <Badge variant="light" color="light" start""={<Plus"" />}>
               Light
             </Badge>
-            <Badge variant="light" color="dark" startIcon={<PlusIcon />}>
+            <Badge variant="light" color="dark" start""={<Plus"" />}>
               Dark
             </Badge>
           </div>
         </ComponentCard>
-        <ComponentCard title="Solid Background with Left Icon">
+        <ComponentCard title="Solid Background with Left """>
           <div className="flex flex-wrap gap-4 sm:items-center sm:justify-center">
-            <Badge variant="solid" color="primary" startIcon={<PlusIcon />}>
+            <Badge variant="solid" color="primary" start""={<Plus"" />}>
               Primary
             </Badge>
-            <Badge variant="solid" color="success" startIcon={<PlusIcon />}>
+            <Badge variant="solid" color="success" start""={<Plus"" />}>
               Success
             </Badge>{" "}
-            <Badge variant="solid" color="error" startIcon={<PlusIcon />}>
+            <Badge variant="solid" color="error" start""={<Plus"" />}>
               Error
             </Badge>{" "}
-            <Badge variant="solid" color="warning" startIcon={<PlusIcon />}>
+            <Badge variant="solid" color="warning" start""={<Plus"" />}>
               Warning
             </Badge>{" "}
-            <Badge variant="solid" color="info" startIcon={<PlusIcon />}>
+            <Badge variant="solid" color="info" start""={<Plus"" />}>
               Info
             </Badge>
-            <Badge variant="solid" color="light" startIcon={<PlusIcon />}>
+            <Badge variant="solid" color="light" start""={<Plus"" />}>
               Light
             </Badge>
-            <Badge variant="solid" color="dark" startIcon={<PlusIcon />}>
+            <Badge variant="solid" color="dark" start""={<Plus"" />}>
               Dark
             </Badge>
           </div>
         </ComponentCard>
-        <ComponentCard title="Light Background with Right Icon">
+        <ComponentCard title="Light Background with Right """>
           <div className="flex flex-wrap gap-4 sm:items-center sm:justify-center">
-            <Badge variant="light" color="primary" endIcon={<PlusIcon />}>
+            <Badge variant="light" color="primary" end""={<Plus"" />}>
               Primary
             </Badge>
-            <Badge variant="light" color="success" endIcon={<PlusIcon />}>
+            <Badge variant="light" color="success" end""={<Plus"" />}>
               Success
             </Badge>{" "}
-            <Badge variant="light" color="error" endIcon={<PlusIcon />}>
+            <Badge variant="light" color="error" end""={<Plus"" />}>
               Error
             </Badge>{" "}
-            <Badge variant="light" color="warning" endIcon={<PlusIcon />}>
+            <Badge variant="light" color="warning" end""={<Plus"" />}>
               Warning
             </Badge>{" "}
-            <Badge variant="light" color="info" endIcon={<PlusIcon />}>
+            <Badge variant="light" color="info" end""={<Plus"" />}>
               Info
             </Badge>
-            <Badge variant="light" color="light" endIcon={<PlusIcon />}>
+            <Badge variant="light" color="light" end""={<Plus"" />}>
               Light
             </Badge>
-            <Badge variant="light" color="dark" endIcon={<PlusIcon />}>
+            <Badge variant="light" color="dark" end""={<Plus"" />}>
               Dark
             </Badge>
           </div>
         </ComponentCard>
-        <ComponentCard title="Solid Background with Right Icon">
+        <ComponentCard title="Solid Background with Right """>
           <div className="flex flex-wrap gap-4 sm:items-center sm:justify-center">
-            <Badge variant="solid" color="primary" endIcon={<PlusIcon />}>
+            <Badge variant="solid" color="primary" end""={<Plus"" />}>
               Primary
             </Badge>
-            <Badge variant="solid" color="success" endIcon={<PlusIcon />}>
+            <Badge variant="solid" color="success" end""={<Plus"" />}>
               Success
             </Badge>{" "}
-            <Badge variant="solid" color="error" endIcon={<PlusIcon />}>
+            <Badge variant="solid" color="error" end""={<Plus"" />}>
               Error
             </Badge>{" "}
-            <Badge variant="solid" color="warning" endIcon={<PlusIcon />}>
+            <Badge variant="solid" color="warning" end""={<Plus"" />}>
               Warning
             </Badge>{" "}
-            <Badge variant="solid" color="info" endIcon={<PlusIcon />}>
+            <Badge variant="solid" color="info" end""={<Plus"" />}>
               Info
             </Badge>
-            <Badge variant="solid" color="light" endIcon={<PlusIcon />}>
+            <Badge variant="solid" color="light" end""={<Plus"" />}>
               Light
             </Badge>
-            <Badge variant="solid" color="dark" endIcon={<PlusIcon />}>
+            <Badge variant="solid" color="dark" end""={<Plus"" />}>
               Dark
             </Badge>
           </div>

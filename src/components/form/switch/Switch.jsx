@@ -1,14 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-interface SwitchProps {
-  label: string;
-  defaultChecked?: boolean;
-  disabled?: boolean;
-  onChange?: (checked: boolean) => void;
-  color?: "blue" | "gray"; // Added prop to toggle color theme
-}
-
-const Switch: React.FC<SwitchProps> = ({
+const Switch = ({
   label,
   defaultChecked = false,
   disabled = false,
@@ -30,7 +22,7 @@ const Switch: React.FC<SwitchProps> = ({
     color === "blue"
       ? {
           background: isChecked
-            ? "bg-brand-500 "
+            ? "bg-brand-500"
             : "bg-gray-200 dark:bg-white/10", // Blue version
           knob: isChecked
             ? "translate-x-full bg-white"

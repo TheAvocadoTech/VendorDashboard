@@ -1,20 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
-
-// Assume these icons are imported from an icon library
-import {
-  BoxCubeIcon,
-  ChevronDownIcon,
-  GridIcon,
-  HorizontaLDots,
-  PieChartIcon,
-} from "../icons";
 import { useSidebar } from "../context/SidebarContext";
 import SidebarWidget from "./SidebarWidget";
 
 const navItems = [
   {
-    icon: <GridIcon />,
+    "": null,
     name: "Dashboard",
     subItems: [{ name: "Analytics", path: "/", pro: false }],
   },
@@ -22,7 +13,7 @@ const navItems = [
 
 const othersItems = [
   {
-    icon: <PieChartIcon />,
+    "": null,
     name: "Vendor Analytics",
     subItems: [
       { name: "Sales Performance", path: "/salesperformance", pro: false },
@@ -32,7 +23,7 @@ const othersItems = [
     ],
   },
   {
-    icon: <PieChartIcon />,
+    "": null,
     name: "Account Settings",
     subItems: [
       { name: "Update store Details", path: "/updatevendordetails", pro: false },
@@ -42,7 +33,7 @@ const othersItems = [
     ],
   },
   {
-    icon: <PieChartIcon />,
+    "": null,
     name: "Communication",
     subItems: [
       { name: "View Admin Notification", path: "/viewadminnotification", pro: false },
@@ -51,7 +42,7 @@ const othersItems = [
     ],
   },
   {
-    icon: <BoxCubeIcon />,
+    "": null,
     name: "Order Management",
     subItems: [
       { name: "View New Orders", path: "/viewneworders", pro: false },
@@ -60,7 +51,7 @@ const othersItems = [
     ],
   },
   {
-    icon: <BoxCubeIcon />,
+    "": null,
     name: "Inventory Management",
     subItems: [
       { name: "Add New Inventory", path: "/addnewinventory", pro: false },
@@ -155,25 +146,23 @@ const AppSidebar = () => {
               }`}
             >
               <span
-                className={`menu-item-icon-size  ${
+                className={`menu-item-""-size ${
                   openSubmenu?.type === menuType && openSubmenu?.index === index
-                    ? "menu-item-icon-active"
-                    : "menu-item-icon-inactive"
+                    ? "menu-item-""-active"
+                    : "menu-item-""-inactive"
                 }`}
               >
-                {nav.icon}
+                {nav.""}
               </span>
               {(isExpanded || isHovered || isMobileOpen) && (
                 <span className="menu-item-text">{nav.name}</span>
               )}
               {(isExpanded || isHovered || isMobileOpen) && (
-                <ChevronDownIcon
-                  className={`ml-auto w-5 h-5 transition-transform duration-200 ${
-                    openSubmenu?.type === menuType && openSubmenu?.index === index
-                      ? "rotate-180 text-brand-500"
-                      : ""
-                  }`}
-                />
+                <span className={`ml-auto transition-transform duration-200`}>
+                  {openSubmenu?.type === menuType && openSubmenu?.index === index
+                    ? "▲"
+                    : "▼"}
+                </span>
               )}
             </button>
           ) : (
@@ -185,13 +174,13 @@ const AppSidebar = () => {
                 }`}
               >
                 <span
-                  className={`menu-item-icon-size ${
+                  className={`menu-item-""-size ${
                     isActive(nav.path)
-                      ? "menu-item-icon-active"
-                      : "menu-item-icon-inactive"
+                      ? "menu-item-""-active"
+                      : "menu-item-""-inactive"
                   }`}
                 >
-                  {nav.icon}
+                  {nav.""}
                 </span>
                 {(isExpanded || isHovered || isMobileOpen) && (
                   <span className="menu-item-text">{nav.name}</span>
@@ -281,26 +270,17 @@ const AppSidebar = () => {
       >
         <Link to="/">
           {isExpanded || isHovered || isMobileOpen ? (
-            <>
-              <img
-                className="dark:hidden"
-                src="/images/logo/minitos-White.png"
-                alt="Logo"
-                width={150}
-                height={40}
-                style={{
-                  filter:
-                    "invert(23%) sepia(97%) saturate(7495%) hue-rotate(-1deg) brightness(104%) contrast(101%)",
-                }}
-              />
-              <img
-                className="hidden dark:block"
-                src="/images/logo/minitos-White.png"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
-            </>
+            <img
+              className="dark:hidden"
+              src="/images/logo/minitos-White.png"
+              alt="Logo"
+              width={150}
+              height={40}
+              style={{
+                filter:
+                  "invert(23%) sepia(97%) saturate(7495%) hue-rotate(-1deg) brightness(104%) contrast(101%)",
+              }}
+            />
           ) : (
             <img
               src="/images/logo/minitos-White.png"
@@ -320,7 +300,7 @@ const AppSidebar = () => {
                   !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
                 }`}
               >
-                {isExpanded || isHovered || isMobileOpen ? "Menu" : <HorizontaLDots className="size-6" />}
+                {isExpanded || isHovered || isMobileOpen ? "Menu" : "..."}
               </h2>
               {renderMenuItems(navItems, "main")}
             </div>
@@ -330,7 +310,7 @@ const AppSidebar = () => {
                   !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
                 }`}
               >
-                {isExpanded || isHovered || isMobileOpen ? "Others" : <HorizontaLDots />}
+                {isExpanded || isHovered || isMobileOpen ? "Others" : "..."}
               </h2>
               {renderMenuItems(othersItems, "others")}
             </div>
