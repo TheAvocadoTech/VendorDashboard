@@ -208,7 +208,7 @@ const PlatformAnnouncement = () => {
           onClick={() => setShowCreateForm(!showCreateForm)}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
         >
-          {showCreateForm ? 'Cancel' : 'Create Announcement'}
+          {showCreateForm ? 'Cancel' : '+ Create Announcement'}
         </button>
       </div>
 
@@ -219,16 +219,249 @@ const PlatformAnnouncement = () => {
         </div>
       )}
 
-      {/* Form */}
+      {/* Create/Edit Form */}
       {showCreateForm && (
         <div className="mb-6 bg-white p-6 rounded-lg shadow-md">
-          {/* Form content here (same as TSX, unchanged since JSX works same) */}
-          {/* ... */}
+          <h2 className="text-lg font-semibold mb-4">
+            {isEditing ? 'Edit Announcement' : 'Create New Announcement'}
+          </h2>
+          
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Type
+                </label>
+                <select
+                  name="type"
+                  value={formData.type}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="info">Info</option>
+                  <option value="warning">Warning</option>
+                  <option value="urgent">Urgent</option>
+                </select>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Audience
+                </label>
+                <select
+                  name="audience"
+                  value={formData.audience}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="all">All Users</option>
+                  <option value="vendors">Vendors Only</option>
+                  <option value="customers">Customers Only</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Status
+                </label>
+                <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="active">Active</option>
+                  <option value="scheduled">Scheduled</option>
+                </select>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Scheduled For (Optional)
+                </label>
+                <input
+                  type="datetime-local"
+                  name="scheduledFor"
+                  value={formData.scheduledFor}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Expires At (Optional)
+                </label>
+                <input
+                  type="datetime-local"
+                  name="expiresAt"
+                  value={formData.expiresAt}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Message
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                rows={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            
+            <div className="flex gap-2">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+              >
+                {isLoading ? 'Saving...' : isEditing ? 'Update Announcement' : 'Create Announcement'}
+              </button>
+              <button
+                type="button"
+                onClick={resetForm}
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
         </div>
       )}
 
-      {/* Table/List rendering */}
-      {/* ... rest of JSX same as before */}
+      {/* Filters */}
+      <div className="mb-6 bg-white p-4 rounded-lg shadow-sm">
+        <div className="flex flex-col md:flex-row gap-4 items-center">
+          <div className="flex gap-2">
+            <button
+              onClick={() => setViewMode('all')}
+              className={`px-3 py-1 rounded-full text-sm ${viewMode === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setViewMode('active')}
+              className={`px-3 py-1 rounded-full text-sm ${viewMode === 'active' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+            >
+              Active
+            </button>
+            <button
+              onClick={() => setViewMode('scheduled')}
+              className={`px-3 py-1 rounded-full text-sm ${viewMode === 'scheduled' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+            >
+              Scheduled
+            </button>
+            <button
+              onClick={() => setViewMode('expired')}
+              className={`px-3 py-1 rounded-full text-sm ${viewMode === 'expired' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+            >
+              Expired
+            </button>
+          </div>
+          
+          <div className="flex-1 md:max-w-xs">
+            <input
+              type="text"
+              placeholder="Search announcements..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Loading */}
+      {isLoading && (
+        <div className="flex justify-center items-center py-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        </div>
+      )}
+
+      {/* Announcements List */}
+      {!isLoading && (
+        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          {filteredAnnouncements.length === 0 ? (
+            <div className="p-8 text-center text-gray-500">
+              No announcements found.
+            </div>
+          ) : (
+            <div className="divide-y divide-gray-200">
+              {filteredAnnouncements.map((announcement) => (
+                <div key={announcement._id} className="p-6 hover:bg-gray-50">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h3 className="text-lg font-semibold text-gray-900">
+                          {announcement.title}
+                        </h3>
+                        <span className={`px-2 py-1 text-xs rounded-full ${getTypeBadgeColor(announcement.type)}`}>
+                          {announcement.type}
+                        </span>
+                        <span className={`px-2 py-1 text-xs rounded-full ${getStatusBadgeColor(announcement.status)}`}>
+                          {announcement.status}
+                        </span>
+                      </div>
+                      
+                      <p className="text-gray-600 mb-3">
+                        {announcement.message}
+                      </p>
+                      
+                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <span>By: {announcement.createdBy.name}</span>
+                        <span>Created: {formatDate(announcement.createdAt)}</span>
+                        {announcement.expiresAt && (
+                          <span>Expires: {formatDate(announcement.expiresAt)}</span>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-2 ml-4">
+                      <button
+                        onClick={() => handleEdit(announcement)}
+                        className="px-3 py-1 text-sm text-blue-600 hover:bg-blue-50 rounded"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(announcement._id)}
+                        className="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
@@ -238,7 +471,7 @@ const dummyAnnouncements = [
   {
     _id: '1',
     title: 'Platform Maintenance',
-    message: 'We will be performing scheduled maintenance on our platform...',
+    message: 'We will be performing scheduled maintenance on our platform from 2 AM to 4 AM EST on May 6th. During this time, some features may be temporarily unavailable.',
     type: 'info',
     status: 'active',
     audience: 'all',
@@ -252,17 +485,30 @@ const dummyAnnouncements = [
   {
     _id: '2',
     title: 'New Feature: Real-time Order Tracking',
-    message: 'We\'re excited to announce our new real-time order tracking feature...',
+    message: 'We are excited to announce our new real-time order tracking feature that allows customers to track their orders in real-time.',
     type: 'info',
     status: 'active',
-    audience: 'stores',
+    audience: 'all',
     createdAt: '2025-04-25T14:15:00Z',
     createdBy: {
       _id: 'admin2',
       name: 'Product Manager'
     }
   },
-  // ... rest of dummy announcements
+  {
+    _id: '3',
+    title: 'Payment System Updates',
+    message: 'Important updates to our payment processing system will be rolled out next week. Please review the new payment guidelines.',
+    type: 'warning',
+    status: 'scheduled',
+    audience: 'vendors',
+    createdAt: '2025-04-20T09:00:00Z',
+    scheduledFor: '2025-05-01T08:00:00Z',
+    createdBy: {
+      _id: 'admin3',
+      name: 'Finance Team'
+    }
+  }
 ];
 
-export default PlatformAnnouncement;
+export default PlatformAnnouncement

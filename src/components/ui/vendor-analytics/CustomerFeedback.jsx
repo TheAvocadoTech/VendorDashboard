@@ -14,10 +14,7 @@ import {
   InputLabel,
   CircularProgress,
   Chip,
-  Card,
-  CardContent,
   Button,
-  ""Button,
   Tabs,
   Tab,
   Pagination,
@@ -27,14 +24,6 @@ import {
   DialogActions,
   Snackbar
 } from '@mui/material';
-import {
-  ThumbUp,
-  ThumbDown,
-  Search,
-  Reply,
-  KeyboardArrowDown,
-  KeyboardArrowUp
-} from '@mui/""s-material';
 import {
   BarChart,
   Bar,
@@ -291,7 +280,7 @@ const CustomerFeedback = () => {
                       {feedback.replied && <Typography variant="body2" color="primary">Vendor Reply: {feedback.vendorReply}</Typography>}
                     </Grid>
                     <Grid item>
-                      <""Button onClick={() => handleOpenReplyDialog(feedback)}><Reply /></""Button>
+                      <Button variant="outlined" onClick={() => handleOpenReplyDialog(feedback)}>Reply</Button>
                     </Grid>
                   </Grid>
                 </Paper>

@@ -14,11 +14,6 @@ import {
   CircularProgress,
   Avatar
 } from '@mui/material';
-import Storefront"" from '@mui/""s-material/Storefront';
-import Phone"" from '@mui/""s-material/Phone';
-import Email"" from '@mui/""s-material/Email';
-import LocationOn"" from '@mui/""s-material/LocationOn';
-import Save"" from '@mui/""s-material/Save';
 
 // Mock vendor data - replace with actual API call in production
 const MOCK_VENDOR_DATA = {
@@ -186,8 +181,8 @@ const UpdateContactInformation = () => {
               <Card elevation={1}>
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" textAlign="center" mb={2}>
-                    <Avatar sx={{ width: 120, height: 120, mb: 2, bgcolor: 'primary.main' }}>
-                      <Storefront"" sx={{ fontSize: 60 }} />
+                    <Avatar sx={{ width: 120, height: 120, mb: 2, bgcolor: 'primary.main', fontSize: '2.5rem' }}>
+                      🏪
                     </Avatar>
                     <Typography variant="h6" fontWeight="bold">{formData.storeName}</Typography>
                     <Typography variant="body2" color="textSecondary">
@@ -199,15 +194,15 @@ const UpdateContactInformation = () => {
 
                   <Box>
                     <Box display="flex" alignItems="center" mb={1.5}>
-                      <Phone"" sx={{ mr: 1, color: 'primary.main' }} />
+                      <Box component="span" sx={{ mr: 1, color: 'primary.main', fontWeight: 'bold' }}>📞</Box>
                       <Typography variant="body2">{formData.phone}</Typography>
                     </Box>
                     <Box display="flex" alignItems="center" mb={1.5}>
-                      <Email"" sx={{ mr: 1, color: 'primary.main' }} />
+                      <Box component="span" sx={{ mr: 1, color: 'primary.main', fontWeight: 'bold' }}>📧</Box>
                       <Typography variant="body2" sx={{ wordBreak: 'break-all' }}>{formData.email}</Typography>
                     </Box>
                     <Box display="flex" alignItems="flex-start" mb={1.5}>
-                      <LocationOn"" sx={{ mr: 1, color: 'primary.main', mt: 0.5 }} />
+                      <Box component="span" sx={{ mr: 1, color: 'primary.main', fontWeight: 'bold', mt: 0.5 }}>📍</Box>
                       <Typography variant="body2">
                         {formData.address}, {formData.city}, {formData.state} {formData.zipCode}
                       </Typography>
@@ -271,8 +266,17 @@ const UpdateContactInformation = () => {
                   </Grid>
 
                   <Box mt={4} display="flex" justifyContent="flex-end">
-                    <Button variant="contained" color="primary" size="large" type="submit" disabled={saving} start""={saving ? <CircularProgress size={20} /> : <Save"" />}>
-                      {saving ? 'Saving...' : 'Save Changes'}
+                    <Button variant="contained" color="primary" size="large" type="submit" disabled={saving}>
+                      {saving ? (
+                        <>
+                          <CircularProgress size={20} sx={{ mr: 1 }} />
+                          Saving...
+                        </>
+                      ) : (
+                        <>
+                          💾 Save Changes
+                        </>
+                      )}
                     </Button>
                   </Box>
                 </CardContent>

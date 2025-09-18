@@ -1,29 +1,27 @@
-const React = require("react");
+// src/components/ui/table/index.jsx
 
 // Table Component
-const Table = ({ children, className = "" }) => {
-  return React.createElement("table", { className: `min-w-full ${className}` }, children);
+export const Table = ({ children, className = "" }) => {
+  return <table className={`min-w-full ${className}`}>{children}</table>;
 };
 
 // TableHeader Component
-const TableHeader = ({ children, className = "" }) => {
-  return React.createElement("thead", { className }, children);
+export const TableHeader = ({ children, className = "" }) => {
+  return <thead className={className}>{children}</thead>;
 };
 
 // TableBody Component
-const TableBody = ({ children, className = "" }) => {
-  return React.createElement("tbody", { className }, children);
+export const TableBody = ({ children, className = "" }) => {
+  return <tbody className={className}>{children}</tbody>;
 };
 
 // TableRow Component
-const TableRow = ({ children, className = "" }) => {
-  return React.createElement("tr", { className }, children);
+export const TableRow = ({ children, className = "" }) => {
+  return <tr className={className}>{children}</tr>;
 };
 
 // TableCell Component
-const TableCell = ({ children, isHeader = false, className = "" }) => {
+export const TableCell = ({ children, isHeader = false, className = "" }) => {
   const CellTag = isHeader ? "th" : "td";
-  return React.createElement(CellTag, { className }, children);
+  return <CellTag className={className}>{children}</CellTag>;
 };
-
-module.exports = { Table, TableHeader, TableBody, TableRow, TableCell };

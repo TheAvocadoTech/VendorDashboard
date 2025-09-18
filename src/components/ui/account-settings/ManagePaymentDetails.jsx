@@ -20,17 +20,9 @@ import {
   Select, 
   Snackbar, 
   Alert,
-  ""Button,
   Divider,
   CircularProgress
 } from '@mui/material';
-import { 
-  Add as Add"", 
-  Edit as Edit"", 
-  Delete as Delete"",
-  CheckCircle as CheckCircle"",
-  Warning as Warning""
-} from '@mui/""s-material';
 
 // Dummy Data
 const dummyPaymentMethods = [
@@ -282,6 +274,13 @@ const ManagePaymentDetails = () => {
         if (!formData.accountNumber.includes('*')) updatedMethod.accountNumber = `******${formData.accountNumber.slice(-4)}`;
         if (!formData.routingNumber.includes('*')) updatedMethod.routingNumber = `******${formData.routingNumber.slice(-4)}`;
       }
+      const updatedMethods = paymentMethods.map(m => m.id === currentMethod.id ? updatedMethod : m);
+      if (formData.isDefault) {
+        updatedMethods.forEach(m => {
+          if (m.id !== currentMethod.id) m.isDefault = false;
+        });
+      }
+      setPaymentMethods(updatedMethods);
       handleCloseDialogs();
       showSnackbar('Payment method updated successfully', 'success');
       setLoading(false);
@@ -347,16 +346,16 @@ const ManagePaymentDetails = () => {
         <>
           <Box sx={{ mb:3, display:'flex', justifyContent:'space-between', alignItems:'center' }}>
             <Typography variant="h6">Your Payment Methods</Typography>
-            <Button variant="contained" start""={<Add"" />} onClick={handleOpenAddDialog}>Add Payment Method</Button>
+            <Button variant="contained" onClick={handleOpenAddDialog}>+ Add Payment Method</Button>
           </Box>
 
           {paymentMethods.length===0 ? (
             <Card variant="outlined" sx={{ mb:3 }}>
               <CardContent sx={{ textAlign:'center', py:4 }}>
-                <Warning"" sx={{ fontSize:60, color:'text.secondary', mb:2 }} />
+                <Typography variant="h1" sx={{ fontSize:60, color:'text.secondary', mb:2 }}>⚠️</Typography>
                 <Typography variant="h6" sx={{ mb:1 }}>No Payment Methods Found</Typography>
                 <Typography color="text.secondary" sx={{ mb:3 }}>You haven't added any payment methods yet. Add a payment method to get started.</Typography>
-                <Button variant="contained" start""={<Add"" />} onClick={handleOpenAddDialog}>Add Payment Method</Button>
+                <Button variant="contained" onClick={handleOpenAddDialog}>+ Add Payment Method</Button>
               </CardContent>
             </Card>
           ) : (
@@ -379,11 +378,11 @@ const ManagePaymentDetails = () => {
                         </>
                       )}
                       <Typography color="text.secondary" sx={{ mt:1 }}>Added on {formatDate(method.dateAdded)}</Typography>
-                      <Box sx={{ mt:3, display:'flex', justifyContent:'space-between' }}>
-                        {!method.isDefault && <Button size="small" onClick={()=>handleSetDefaultMethod(method.id)} start""={<CheckCircle"" />}>Set Default</Button>}
-                        <Box sx={{ marginLeft:'auto', display:'flex' }}>
-                          <""Button size="small" color="primary" onClick={()=>handleOpenEditDialog(method)}><Edit"" /></""Button>
-                          <""Button size="small" color="error" onClick={()=>handleOpenDeleteDialog(method)}><Delete"" /></""Button>
+                      <Box sx={{ mt:3, display:'flex', justifyContent:'space-between', alignItems: 'center' }}>
+                        {!method.isDefault && <Button size="small" onClick={()=>handleSetDefaultMethod(method.id)}>✓ Set Default</Button>}
+                        <Box sx={{ marginLeft:'auto', display:'flex', gap: 1 }}>
+                          <Button size="small" color="primary" onClick={()=>handleOpenEditDialog(method)}>Edit</Button>
+                          <Button size="small" color="error" onClick={()=>handleOpenDeleteDialog(method)}>Delete</Button>
                         </Box>
                       </Box>
                     </CardContent>
@@ -437,9 +436,235 @@ const ManagePaymentDetails = () => {
         </>
       )}
 
-      {/* Add/Edit/Delete Dialogs & Snackbar */}
-      {/* ... keep all dialogs and snackbar logic identical but remove TS types ... */}
+      {/* Add Payment Method Dialog */}
+      <Dialog open={openAddDialog} onClose={handleCloseDialogs} maxWidth="sm" fullWidth>
+        <DialogTitle>Add Payment Method</DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ mb: 2 }}>
+            Choose a payment method type and fill in the details below.
+          </DialogContentText>
+          
+          <FormControl component="fieldset" sx={{ mb: 3 }}>
+            <RadioGroup value={paymentType} onChange={handlePaymentTypeChange} row>
+              <FormControlLabel value="card" control={<Radio />} label="Credit/Debit Card" />
+              <FormControlLabel value="bank" control={<Radio />} label="Bank Account" />
+            </RadioGroup>
+          </FormControl>
 
+          <TextField
+            fullWidth
+            label="Payment Method Name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            sx={{ mb: 2 }}
+          />
+
+          {paymentType === 'card' ? (
+            <>
+              <TextField
+                fullWidth
+                label="Card Number"
+                name="cardNumber"
+                value={formData.cardNumber}
+                onChange={handleInputChange}
+                sx={{ mb: 2 }}
+              />
+              <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+                <FormControl sx={{ minWidth: 120 }}>
+                  <Select
+                    value={formData.expiryMonth}
+                    name="expiryMonth"
+                    onChange={handleSelectChange}
+                    displayEmpty
+                  >
+                    {months.map(month => (
+                      <MenuItem key={month} value={month}>{month}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ minWidth: 120 }}>
+                  <Select
+                    value={formData.expiryYear}
+                    name="expiryYear"
+                    onChange={handleSelectChange}
+                    displayEmpty
+                  >
+                    {years.map(year => (
+                      <MenuItem key={year} value={year}>{year}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              <TextField
+                fullWidth
+                label="CVV"
+                name="cvv"
+                value={formData.cvv}
+                onChange={handleInputChange}
+                sx={{ mb: 2 }}
+              />
+            </>
+          ) : (
+            <>
+              <TextField
+                fullWidth
+                label="Bank Name"
+                name="bankName"
+                value={formData.bankName}
+                onChange={handleInputChange}
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                fullWidth
+                label="Account Number"
+                name="accountNumber"
+                value={formData.accountNumber}
+                onChange={handleInputChange}
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                fullWidth
+                label="Routing Number"
+                name="routingNumber"
+                value={formData.routingNumber}
+                onChange={handleInputChange}
+                sx={{ mb: 2 }}
+              />
+            </>
+          )}
+
+          <FormControlLabel
+            control={
+              <input
+                type="checkbox"
+                checked={formData.isDefault}
+                onChange={(e) => setFormData({...formData, isDefault: e.target.checked})}
+              />
+            }
+            label="Set as default payment method"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialogs}>Cancel</Button>
+          <Button onClick={handleAddPaymentMethod} variant="contained" disabled={loading}>
+            {loading ? <CircularProgress size={20} /> : 'Add Payment Method'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Edit Payment Method Dialog */}
+      <Dialog open={openEditDialog} onClose={handleCloseDialogs} maxWidth="sm" fullWidth>
+        <DialogTitle>Edit Payment Method</DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ mb: 2 }}>
+            Update the details for your payment method below.
+          </DialogContentText>
+          
+          <TextField
+            fullWidth
+            label="Payment Method Name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            sx={{ mb: 2 }}
+          />
+
+          {paymentType === 'card' ? (
+            <>
+              <TextField
+                fullWidth
+                label="Card Number"
+                name="cardNumber"
+                value={formData.cardNumber}
+                onChange={handleInputChange}
+                sx={{ mb: 2 }}
+                disabled={formData.cardNumber.includes('*')}
+              />
+              <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+                <FormControl sx={{ minWidth: 120 }}>
+                  <Select
+                    value={formData.expiryMonth}
+                    name="expiryMonth"
+                    onChange={handleSelectChange}
+                  >
+                    {months.map(month => (
+                      <MenuItem key={month} value={month}>{month}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ minWidth: 120 }}>
+                  <Select
+                    value={formData.expiryYear}
+                    name="expiryYear"
+                    onChange={handleSelectChange}
+                  >
+                    {years.map(year => (
+                      <MenuItem key={year} value={year}>{year}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+            </>
+          ) : (
+            <>
+              <TextField
+                fullWidth
+                label="Bank Name"
+                name="bankName"
+                value={formData.bankName}
+                onChange={handleInputChange}
+                sx={{ mb: 2 }}
+              />
+            </>
+          )}
+
+          <FormControlLabel
+            control={
+              <input
+                type="checkbox"
+                checked={formData.isDefault}
+                onChange={(e) => setFormData({...formData, isDefault: e.target.checked})}
+              />
+            }
+            label="Set as default payment method"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialogs}>Cancel</Button>
+          <Button onClick={handleEditPaymentMethod} variant="contained" disabled={loading}>
+            {loading ? <CircularProgress size={20} /> : 'Update Payment Method'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Delete Payment Method Dialog */}
+      <Dialog open={openDeleteDialog} onClose={handleCloseDialogs}>
+        <DialogTitle>Delete Payment Method</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete "{currentMethod?.name}"? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialogs}>Cancel</Button>
+          <Button onClick={handleDeletePaymentMethod} color="error" disabled={loading}>
+            {loading ? <CircularProgress size={20} /> : 'Delete'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Snackbar */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

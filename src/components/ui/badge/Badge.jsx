@@ -5,8 +5,8 @@ const Badge = ({
   variant = "light",
   color = "primary",
   size = "md",
-  start"",
-  end"",
+  startText,
+  endText,
   children,
 }) => {
   const baseStyles =
@@ -50,9 +50,9 @@ const Badge = ({
 
   return (
     <span className={`${baseStyles} ${sizeClass} ${colorStyles}`}>
-      {start"" && <span className="mr-1">{start""}</span>}
+      {startText && <span className="mr-1">{startText}</span>}
       {children}
-      {end"" && <span className="ml-1">{end""}</span>}
+      {endText && <span className="ml-1">{endText}</span>}
     </span>
   );
 };

@@ -5,8 +5,8 @@ const Button = ({
   children,
   size = "md",
   variant = "primary",
-  start"",
-  end"",
+  startText,
+  endText,
   onClick,
   className = "",
   disabled = false,
@@ -35,9 +35,9 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {start"" && <span className="flex items-center">{start""}</span>}
+      {startText && <span className="flex items-center">{startText}</span>}
       {children}
-      {end"" && <span className="flex items-center">{end""}</span>}
+      {endText && <span className="flex items-center">{endText}</span>}
     </button>
   );
 };

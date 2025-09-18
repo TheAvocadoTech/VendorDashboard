@@ -2,7 +2,7 @@ import ComponentCard from "../../components/common/ComponentCard";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import PageMeta from "../../components/common/PageMeta";
 import Button from "../../components/ui/button/Button";
-import { Box"" } from "../../""s";
+import { Box } from "lucide-react"; // example icon, replace with your own
 
 export default function Buttons() {
   return (
@@ -24,48 +24,34 @@ export default function Buttons() {
             </Button>
           </div>
         </ComponentCard>
-        {/* Primary Button with Start "" */}
-        <ComponentCard title="Primary Button with Left """>
+
+        {/* Primary Button with Left Icon */}
+        <ComponentCard title="Primary Button with Left Icon">
           <div className="flex items-center gap-5">
-            <Button
-              size="sm"
-              variant="primary"
-              start""={<Box"" className="size-5" />}
-            >
+            <Button size="sm" variant="primary" startIcon={<Box className="size-5" />}>
               Button Text
             </Button>
-            <Button
-              size="md"
-              variant="primary"
-              start""={<Box"" className="size-5" />}
-            >
+            <Button size="md" variant="primary" startIcon={<Box className="size-5" />}>
               Button Text
             </Button>
           </div>
         </ComponentCard>
-        {/* Primary Button with Start "" */}
-        <ComponentCard title="Primary Button with Right """>
+
+        {/* Primary Button with Right Icon */}
+        <ComponentCard title="Primary Button with Right Icon">
           <div className="flex items-center gap-5">
-            <Button
-              size="sm"
-              variant="primary"
-              end""={<Box"" className="size-5" />}
-            >
+            <Button size="sm" variant="primary" endIcon={<Box className="size-5" />}>
               Button Text
             </Button>
-            <Button
-              size="md"
-              variant="primary"
-              end""={<Box"" className="size-5" />}
-            >
+            <Button size="md" variant="primary" endIcon={<Box className="size-5" />}>
               Button Text
             </Button>
           </div>
         </ComponentCard>
+
         {/* Outline Button */}
         <ComponentCard title="Secondary Button">
           <div className="flex items-center gap-5">
-            {/* Outline Button */}
             <Button size="sm" variant="outline">
               Button Text
             </Button>
@@ -74,40 +60,26 @@ export default function Buttons() {
             </Button>
           </div>
         </ComponentCard>
-        {/* Outline Button with Start "" */}
-        <ComponentCard title="Outline Button with Left """>
+
+        {/* Outline Button with Left Icon */}
+        <ComponentCard title="Outline Button with Left Icon">
           <div className="flex items-center gap-5">
-            <Button
-              size="sm"
-              variant="outline"
-              start""={<Box"" className="size-5" />}
-            >
+            <Button size="sm" variant="outline" startIcon={<Box className="size-5" />}>
               Button Text
             </Button>
-            <Button
-              size="md"
-              variant="outline"
-              start""={<Box"" className="size-5" />}
-            >
+            <Button size="md" variant="outline" startIcon={<Box className="size-5" />}>
               Button Text
             </Button>
           </div>
-        </ComponentCard>{" "}
-        {/* Outline Button with Start "" */}
-        <ComponentCard title="Outline Button with Right """>
+        </ComponentCard>
+
+        {/* Outline Button with Right Icon */}
+        <ComponentCard title="Outline Button with Right Icon">
           <div className="flex items-center gap-5">
-            <Button
-              size="sm"
-              variant="outline"
-              end""={<Box"" className="size-5" />}
-            >
+            <Button size="sm" variant="outline" endIcon={<Box className="size-5" />}>
               Button Text
             </Button>
-            <Button
-              size="md"
-              variant="outline"
-              end""={<Box"" className="size-5" />}
-            >
+            <Button size="md" variant="outline" endIcon={<Box className="size-5" />}>
               Button Text
             </Button>
           </div>

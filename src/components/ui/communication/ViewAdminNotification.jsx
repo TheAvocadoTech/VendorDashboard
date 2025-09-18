@@ -12,23 +12,11 @@ import {
   Divider,
   Chip,
   Button,
-  ""Button,
+  IconButton,
   Paper,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import {
-  Notifications as Notifications"",
-  CheckCircle as Read"",
-  Delete as Delete"",
-  FilterList as Filter"",
-  ArrowBack as Back"",
-  LocalGroceryStore as Store"",
-  ShoppingCart as Order"",
-  Warning as Warning"",
-  Info as Info"",
-  Assignment as Report"",
-} from "@mui/""s-material";
 import { useNavigate } from "react-router-dom";
 
 const ViewAdminNotification = () => {
@@ -127,19 +115,19 @@ const ViewAdminNotification = () => {
     setNotifications(notifications.filter((n) => n.id !== id));
   };
 
-  // Get ""
-  const getNotification"" = (type) => {
+  // Get notification symbol
+  const getNotificationSymbol = (type) => {
     switch (type) {
       case "order":
-        return <Order"" color="primary" />;
+        return "🛒";
       case "inventory":
-        return <Store"" color="secondary" />;
+        return "🏪";
       case "system":
-        return <Warning"" color="warning" />;
+        return "⚠️";
       case "report":
-        return <Report"" color="info" />;
+        return "📊";
       default:
-        return <Info"" />;
+        return "ℹ️";
     }
   };
 
@@ -189,11 +177,11 @@ const ViewAdminNotification = () => {
     <Box sx={{ p: isMobile ? 1 : 3 }}>
       <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
         {isMobile && selectedNotification && (
-          <""Button onClick={handleBackToList} sx={{ mr: 1 }}>
-            <Back"" />
-          </""Button>
+          <Button onClick={handleBackToList} sx={{ mr: 1 }}>
+            ← Back
+          </Button>
         )}
-        <Notifications"" color="primary" sx={{ fontSize: 32, mr: 2 }} />
+        <Typography sx={{ fontSize: 32, mr: 2 }}>🔔</Typography>
         <Typography variant="h5">Notifications</Typography>
         <Box sx={{ flexGrow: 1 }} />
         {filter === "unread" && filteredNotifications.length > 0 && (
@@ -220,17 +208,6 @@ const ViewAdminNotification = () => {
                   onClick={() => setFilter(f)}
                   color={filter === f ? "primary" : "default"}
                   sx={{ mr: 1 }}
-                  ""={
-                    f === "unread" ? (
-                      <Badge
-                        color="error"
-                        variant="dot"
-                        invisible={filteredNotifications.length === 0}
-                      >
-                        <Filter"" fontSize="small" />
-                      </Badge>
-                    ) : undefined
-                  }
                 />
               )
             )}
@@ -266,8 +243,8 @@ const ViewAdminNotification = () => {
                           variant="dot"
                           invisible={notification.read}
                         >
-                          <Avatar sx={{ bgcolor: "background.paper" }}>
-                            {getNotification""(notification.type)}
+                          <Avatar sx={{ bgcolor: "background.paper", fontSize: '1.5rem' }}>
+                            {getNotificationSymbol(notification.type)}
                           </Avatar>
                         </Badge>
                       </ListItemAvatar>
@@ -311,7 +288,7 @@ const ViewAdminNotification = () => {
                           </>
                         }
                       />
-                      <""Button
+                      <Button
                         edge="end"
                         aria-label="delete"
                         onClick={(e) => {
@@ -319,9 +296,10 @@ const ViewAdminNotification = () => {
                           deleteNotification(notification.id);
                         }}
                         sx={{ ml: 1 }}
+                        size="small"
                       >
-                        <Delete"" fontSize="small" />
-                      </""Button>
+                        🗑️
+                      </Button>
                     </ListItem>
                     {index < filteredNotifications.length - 1 && (
                       <Divider variant="inset" component="li" />
@@ -335,8 +313,8 @@ const ViewAdminNotification = () => {
       ) : (
         <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
           <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-            <Avatar sx={{ bgcolor: "background.paper", mr: 2 }}>
-              {getNotification""(selectedNotification.type)}
+            <Avatar sx={{ bgcolor: "background.paper", mr: 2, fontSize: '1.5rem' }}>
+              {getNotificationSymbol(selectedNotification.type)}
             </Avatar>
             <Typography variant="h6">{selectedNotification.title}</Typography>
             <Box sx={{ flexGrow: 1 }} />
@@ -344,11 +322,6 @@ const ViewAdminNotification = () => {
               label={selectedNotification.read ? "Read" : "Unread"}
               size="small"
               color={selectedNotification.read ? "default" : "primary"}
-              ""={
-                selectedNotification.read ? (
-                  <Read"" fontSize="small" />
-                ) : undefined
-              }
             />
           </Box>
 
@@ -400,14 +373,13 @@ const ViewAdminNotification = () => {
           <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 3 }}>
             <Button
               variant="outlined"
-              start""={<Delete"" />}
               onClick={() => {
                 deleteNotification(selectedNotification.id);
                 handleBackToList();
               }}
               sx={{ mr: 2 }}
             >
-              Delete
+              🗑️ Delete
             </Button>
             <Button
               variant="contained"

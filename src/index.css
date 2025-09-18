@@ -41,19 +41,18 @@ layer(base);
   --color-white: #ffffff;
   --color-black: #101828;
 
-  /* Updated Red Brand Colors */
-  --color-brand-25: #fff5f5;
-  --color-brand-50: #fef2f2;
-  --color-brand-100: #fee2e2;
-  --color-brand-200: #fecaca;
-  --color-brand-300: #fca5a5;
-  --color-brand-400: #f87171;
-  --color-brand-500: #ef4444;
-  --color-brand-600: #dc2626;
-  --color-brand-700: #b91c1c;
-  --color-brand-800: #991b1b;
-  --color-brand-900: #7f1d1d;
-  --color-brand-950: #450a0a;
+  --color-brand-25: #f2f7ff;
+  --color-brand-50: #ecf3ff;
+  --color-brand-100: #dde9ff;
+  --color-brand-200: #c2d6ff;
+  --color-brand-300: #9cb9ff;
+  --color-brand-400: #7592ff;
+  --color-brand-500: #465fff;
+  --color-brand-600: #3641f5;
+  --color-brand-700: #2a31d8;
+  --color-brand-800: #252dae;
+  --color-brand-900: #262e89;
+  --color-brand-950: #161950;
 
   --color-blue-light-25: #f5fbff;
   --color-blue-light-50: #f0f9ff;
@@ -148,7 +147,7 @@ layer(base);
   --shadow-theme-xl: 0px 20px 24px -4px rgba(16, 24, 40, 0.08),
     0px 8px 8px -4px rgba(16, 24, 40, 0.03);
   --shadow-datepicker: -5px 0 0 #262d3c, 5px 0 0 #262d3c;
-  --shadow-focus-ring: 0px 0px 0px 4px rgba(239, 68, 68, 0.12);
+  --shadow-focus-ring: 0px 0px 0px 4px rgba(70, 95, 255, 0.12);
   --shadow-slider-navigation: 0px 1px 2px 0px rgba(16, 24, 40, 0.1),
     0px 1px 3px 0px rgba(16, 24, 40, 0.1);
   --shadow-tooltip: 0px 4px 6px -2px rgba(16, 24, 40, 0.05),
@@ -203,21 +202,21 @@ layer(base);
   @apply text-gray-700 hover:bg-gray-100 group-hover:text-gray-700 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
 }
 
-@utility menu-item-"" {
+@utility menu-item-icon {
   @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400;
 }
 
-@utility menu-item-""-active {
+@utility menu-item-icon-active {
   @apply text-brand-500 dark:text-brand-400;
 }
 
-@utility menu-item-""-size {
+@utility menu-item-icon-size {
   & svg {
     @apply size-6!;
   }
 }
 
-@utility menu-item-""-inactive {
+@utility menu-item-icon-inactive {
   @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
 }
 
@@ -282,7 +281,7 @@ layer(base);
 }
 
 @layer utilities {
-  /* For Remove Date "" */
+  /* For Remove Date Icon */
   input[type="date"]::-webkit-inner-spin-button,
   input[type="time"]::-webkit-inner-spin-button,
   input[type="date"]::-webkit-calendar-picker-indicator,
@@ -496,6 +495,12 @@ span.flatpickr-weekday,
 }
 .flatpickr-day.selected,
 .flatpickr-day.startRange,
+.flatpickr-day.selected,
+.flatpickr-day.endRange {
+  @apply text-white! dark:text-white!;
+}
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
 .flatpickr-day.endRange,
 .flatpickr-day.selected.inRange,
 .flatpickr-day.startRange.inRange,
@@ -512,13 +517,13 @@ span.flatpickr-weekday,
 .flatpickr-day.selected.nextMonthDay,
 .flatpickr-day.startRange.nextMonthDay,
 .flatpickr-day.endRange.nextMonthDay {
-  background: #ef4444;
+  background: #465fff;
   @apply border-brand-500! bg-brand-500! hover:border-brand-500! hover:bg-brand-500!;
 }
 .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
 .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
 .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
-  box-shadow: -10px 0 0 #ef4444;
+  box-shadow: -10px 0 0 #465fff;
 }
 
 .flatpickr-months .flatpickr-prev-month svg,
@@ -573,7 +578,7 @@ span.flatpickr-weekday,
 .dark .fc-button-group .fc-button.fc-next-button:before {
   content: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.50684 19L15.7568 12.75L9.50684 6.5' stroke='%2398A2B3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
 }
-.fc-button-group .fc-button .fc-"" {
+.fc-button-group .fc-button .fc-icon {
   @apply hidden;
 }
 .fc-addEventButton-button {
@@ -670,8 +675,8 @@ span.flatpickr-weekday,
   @apply text-sm font-medium text-gray-500 dark:text-gray-400;
 }
 
-.input-date-""::-webkit-inner-spin-button,
-.input-date-""::-webkit-calendar-picker-indicator {
+.input-date-icon::-webkit-inner-spin-button,
+.input-date-icon::-webkit-calendar-picker-indicator {
   opacity: 0;
   -webkit-appearance: none;
 }

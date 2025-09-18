@@ -7,7 +7,6 @@ import {
 } from "../../ui/table";
 
 import Badge from "../../ui/badge/Badge";
-
 // Table data
 const tableData = [
   {

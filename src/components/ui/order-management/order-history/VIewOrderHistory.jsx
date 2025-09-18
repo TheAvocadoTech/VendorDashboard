@@ -19,11 +19,10 @@ import {
   FormControl,
   Pagination,
   Grid,
-  ""Button,
+  IconButton,
   CircularProgress,
   alpha
 } from '@mui/material';
-import { Search, FilterList, Refresh, ArrowForward } from '@mui/""s-material';
 import { styled } from '@mui/material/styles';
 import dayjs from 'dayjs';
 
@@ -149,10 +148,9 @@ const ViewOrderHistory = () => {
         <Button 
           variant="contained" 
           color="primary"
-          start""={<Refresh />}
           onClick={handleRefresh}
         >
-          Refresh
+          🔄 Refresh
         </Button>
       </Box>
 
@@ -168,7 +166,7 @@ const ViewOrderHistory = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <Search />
+                  🔍
                 </InputAdornment>
               )
             }}
@@ -181,7 +179,7 @@ const ViewOrderHistory = () => {
               onChange={handleStatusFilterChange}
               startAdornment={
                 <InputAdornment position="start">
-                  <FilterList color="action" />
+                  📊
                 </InputAdornment>
               }
               displayEmpty
@@ -243,13 +241,14 @@ const ViewOrderHistory = () => {
                         {order.deliveryAddress}
                       </TableCell>
                       <TableCell>
-                        <""Button
+                        <Button
+                          size="small"
                           color="primary"
                           onClick={() => handleViewOrder(order.id)}
                           aria-label={`View order ${order.id}`}
                         >
-                          <ArrowForward />
-                        </""Button>
+                          View →
+                        </Button>
                       </TableCell>
                     </StyledTableRow>
                   ))

@@ -5,7 +5,6 @@ import SidebarWidget from "./SidebarWidget";
 
 const navItems = [
   {
-    "": null,
     name: "Dashboard",
     subItems: [{ name: "Analytics", path: "/", pro: false }],
   },
@@ -13,7 +12,6 @@ const navItems = [
 
 const othersItems = [
   {
-    "": null,
     name: "Vendor Analytics",
     subItems: [
       { name: "Sales Performance", path: "/salesperformance", pro: false },
@@ -23,7 +21,6 @@ const othersItems = [
     ],
   },
   {
-    "": null,
     name: "Account Settings",
     subItems: [
       { name: "Update store Details", path: "/updatevendordetails", pro: false },
@@ -33,7 +30,6 @@ const othersItems = [
     ],
   },
   {
-    "": null,
     name: "Communication",
     subItems: [
       { name: "View Admin Notification", path: "/viewadminnotification", pro: false },
@@ -42,7 +38,6 @@ const othersItems = [
     ],
   },
   {
-    "": null,
     name: "Order Management",
     subItems: [
       { name: "View New Orders", path: "/viewneworders", pro: false },
@@ -51,7 +46,6 @@ const othersItems = [
     ],
   },
   {
-    "": null,
     name: "Inventory Management",
     subItems: [
       { name: "Add New Inventory", path: "/addnewinventory", pro: false },
@@ -145,20 +139,11 @@ const AppSidebar = () => {
                 !isExpanded && !isHovered ? "lg:justify-center" : "lg:justify-start"
               }`}
             >
-              <span
-                className={`menu-item-""-size ${
-                  openSubmenu?.type === menuType && openSubmenu?.index === index
-                    ? "menu-item-""-active"
-                    : "menu-item-""-inactive"
-                }`}
-              >
-                {nav.""}
-              </span>
               {(isExpanded || isHovered || isMobileOpen) && (
                 <span className="menu-item-text">{nav.name}</span>
               )}
               {(isExpanded || isHovered || isMobileOpen) && (
-                <span className={`ml-auto transition-transform duration-200`}>
+                <span className="ml-auto transition-transform duration-200">
                   {openSubmenu?.type === menuType && openSubmenu?.index === index
                     ? "▲"
                     : "▼"}
@@ -173,15 +158,6 @@ const AppSidebar = () => {
                   isActive(nav.path) ? "menu-item-active" : "menu-item-inactive"
                 }`}
               >
-                <span
-                  className={`menu-item-""-size ${
-                    isActive(nav.path)
-                      ? "menu-item-""-active"
-                      : "menu-item-""-inactive"
-                  }`}
-                >
-                  {nav.""}
-                </span>
                 {(isExpanded || isHovered || isMobileOpen) && (
                   <span className="menu-item-text">{nav.name}</span>
                 )}

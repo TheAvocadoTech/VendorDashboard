@@ -1,10 +1,7 @@
-const React = require("react");
-const { useState, useEffect } = React;
-const {
+import React, { useState, useEffect } from "react";
+import {
   LineChart,
   Line,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -14,9 +11,9 @@ const {
   PieChart,
   Pie,
   Cell,
-} = require("recharts");
+} from "recharts";
 
-// Dummy data
+// Dummy data generator
 const generateDummySalesData = () => {
   const today = new Date();
   const data = [];
@@ -44,17 +41,7 @@ const generateDummySalesData = () => {
   return data;
 };
 
-const dummyProductPerformance = [
-  { name: "Fresh Vegetables", sales: 245, revenue: 9800 },
-  { name: "Dairy Products", sales: 187, revenue: 7480 },
-  { name: "Bakery Items", sales: 134, revenue: 5360 },
-  { name: "Snacks", sales: 156, revenue: 4680 },
-  { name: "Beverages", sales: 145, revenue: 4350 },
-  { name: "Frozen Foods", sales: 92, revenue: 3680 },
-  { name: "Organic Products", sales: 68, revenue: 3400 },
-  { name: "Canned Goods", sales: 76, revenue: 1900 },
-];
-
+// Dummy Pie chart data
 const dummySalesByCategory = [
   { name: "Fresh Produce", value: 35 },
   { name: "Dairy & Eggs", value: 20 },
@@ -111,129 +98,105 @@ function SalesPerformance() {
   const formatCurrency = (value) => `$${value.toFixed(2)}`;
 
   if (loading) {
-    return React.createElement(
-      "div",
-      { className: "flex items-center justify-center h-screen" },
-      React.createElement(
-        "div",
-        { className: "text-center" },
-        React.createElement("div", {
-          className: "spinner-border text-primary",
-          role: "status",
-        }),
-        React.createElement("p", { className: "mt-2" }, "Loading sales data...")
-      )
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading sales data...</p>
+        </div>
+      </div>
     );
   }
 
-  return React.createElement(
-    "div",
-    { className: "p-6 bg-gray-50 min-h-screen" },
-    // Header
-    React.createElement(
-      "div",
-      { className: "flex justify-between items-center mb-6" },
-      React.createElement("h1", { className: "text-2xl font-bold text-gray-800" }, "Sales Performance"),
-      React.createElement(
-        "select",
-        {
-          value: timeRange,
-          onChange: (e) => setTimeRange(e.target.value),
-          className: "px-3 py-2 border rounded-md shadow-sm",
-        },
-        React.createElement("option", { value: "7days" }, "Last 7 Days"),
-        React.createElement("option", { value: "30days" }, "Last 30 Days"),
-        React.createElement("option", { value: "90days" }, "Last 90 Days"),
-        React.createElement("option", { value: "year" }, "This Year")
-      )
-    ),
-    // Metrics
-    React.createElement(
-      "div",
-      { className: "grid grid-cols-1 md:grid-cols-4 gap-6 mb-6" },
-      React.createElement(
-        "div",
-        { className: "bg-white rounded-lg shadow-md p-4" },
-        React.createElement("p", { className: "text-sm text-gray-500" }, "Total Revenue"),
-        React.createElement("h3", { className: "text-xl font-bold" }, formatCurrency(summaryMetrics.totalRevenue))
-      ),
-      React.createElement(
-        "div",
-        { className: "bg-white rounded-lg shadow-md p-4" },
-        React.createElement("p", { className: "text-sm text-gray-500" }, "Total Orders"),
-        React.createElement("h3", { className: "text-xl font-bold" }, summaryMetrics.totalOrders)
-      ),
-      React.createElement(
-        "div",
-        { className: "bg-white rounded-lg shadow-md p-4" },
-        React.createElement("p", { className: "text-sm text-gray-500" }, "Avg Order Value"),
-        React.createElement("h3", { className: "text-xl font-bold" }, formatCurrency(summaryMetrics.averageOrderValue))
-      ),
-      React.createElement(
-        "div",
-        { className: "bg-white rounded-lg shadow-md p-4" },
-        React.createElement("p", { className: "text-sm text-gray-500" }, "Growth Rate"),
-        React.createElement(
-          "h3",
-          { className: "text-xl font-bold" },
-          summaryMetrics.growthRate.toFixed(2),
-          "%"
-        )
-      )
-    ),
-    // Chart
-    React.createElement(
-      "div",
-      { className: "bg-white rounded-lg shadow-md p-4 mb-6" },
-      React.createElement("h3", { className: "text-lg font-semibold mb-4" }, "Revenue Trend"),
-      React.createElement(
-        ResponsiveContainer,
-        { width: "100%", height: 300 },
-        React.createElement(
-          LineChart,
-          { data: salesData },
-          React.createElement(CartesianGrid, { strokeDasharray: "3 3" }),
-          React.createElement(XAxis, { dataKey: "date" }),
-          React.createElement(YAxis, null),
-          React.createElement(Tooltip, null),
-          React.createElement(Legend, null),
-          React.createElement(Line, { type: "monotone", dataKey: "revenue", stroke: "#8884d8", activeDot: { r: 8 } }),
-          React.createElement(Line, { type: "monotone", dataKey: "orders", stroke: "#82ca9d" })
-        )
-      )
-    ),
-    // Pie Chart
-    React.createElement(
-      "div",
-      { className: "bg-white rounded-lg shadow-md p-4" },
-      React.createElement("h3", { className: "text-lg font-semibold mb-4" }, "Sales by Category"),
-      React.createElement(
-        ResponsiveContainer,
-        { width: "100%", height: 300 },
-        React.createElement(
-          PieChart,
-          null,
-          React.createElement(
-            Pie,
-            {
-              data: dummySalesByCategory,
-              cx: "50%",
-              cy: "50%",
-              labelLine: false,
-              outerRadius: 100,
-              fill: "#8884d8",
-              dataKey: "value",
-              label: (entry) => `${entry.name} (${entry.value}%)`,
-            },
-            dummySalesByCategory.map((entry, index) =>
-              React.createElement(Cell, { key: index, fill: COLORS[index % COLORS.length] })
-            )
-          ),
-          React.createElement(Tooltip, null)
-        )
-      )
-    )
+  return (
+    <div className="p-6 bg-gray-50 min-h-screen">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Sales Performance</h1>
+        <select
+          value={timeRange}
+          onChange={(e) => setTimeRange(e.target.value)}
+          className="px-3 py-2 border rounded-md shadow-sm"
+        >
+          <option value="7days">Last 7 Days</option>
+          <option value="30days">Last 30 Days</option>
+          <option value="90days">Last 90 Days</option>
+          <option value="year">This Year</option>
+        </select>
+      </div>
+
+      {/* Summary metrics */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+        <div className="bg-white rounded-lg shadow-md p-4">
+          <p className="text-sm text-gray-500">Total Revenue</p>
+          <h3 className="text-xl font-bold">
+            {formatCurrency(summaryMetrics.totalRevenue)}
+          </h3>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-4">
+          <p className="text-sm text-gray-500">Total Orders</p>
+          <h3 className="text-xl font-bold">{summaryMetrics.totalOrders}</h3>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-4">
+          <p className="text-sm text-gray-500">Avg Order Value</p>
+          <h3 className="text-xl font-bold">
+            {formatCurrency(summaryMetrics.averageOrderValue)}
+          </h3>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-4">
+          <p className="text-sm text-gray-500">Growth Rate</p>
+          <h3 className="text-xl font-bold">
+            {summaryMetrics.growthRate.toFixed(2)}%
+          </h3>
+        </div>
+      </div>
+
+      {/* Line chart */}
+      <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+        <h3 className="text-lg font-semibold mb-4">Revenue Trend</h3>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={salesData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="revenue"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+            <Line type="monotone" dataKey="orders" stroke="#82ca9d" />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Pie chart */}
+      <div className="bg-white rounded-lg shadow-md p-4">
+        <h3 className="text-lg font-semibold mb-4">Sales by Category</h3>
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart>
+            <Pie
+              data={dummySalesByCategory}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              outerRadius={100}
+              fill="#8884d8"
+              dataKey="value"
+              label={(entry) => `${entry.name} (${entry.value}%)`}
+            >
+              {dummySalesByCategory.map((entry, index) => (
+                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
   );
 }
 
-module.exports = SalesPerformance;
+export default SalesPerformance;

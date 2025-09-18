@@ -10,7 +10,7 @@ import {
   TableHead,
   TableRow,
   Chip,
-  ""Button,
+  IconButton,
   Button,
   Dialog,
   DialogTitle,
@@ -23,14 +23,6 @@ import {
   InputAdornment,
   Tooltip,
 } from "@mui/material";
-import {
-  Search as Search"",
-  FilterList as FilterList"",
-  Visibility as Visibility"",
-  Reply as Reply"",
-  Close as Close"",
-  Refresh as Refresh"",
-} from "@mui/""s-material";
 
 // Dummy data
 const dummySupportRequests = [
@@ -268,7 +260,7 @@ const SupportRequest = () => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <Search"" />
+              🔍
             </InputAdornment>
           ),
         }}
@@ -309,14 +301,22 @@ const SupportRequest = () => {
                 <TableCell>{formatDate(request.updatedAt)}</TableCell>
                 <TableCell align="right">
                   <Tooltip title="View">
-                    <""Button onClick={() => handleViewRequest(request)}>
-                      <Visibility"" />
-                    </""Button>
+                    <Button 
+                      size="small" 
+                      onClick={() => handleViewRequest(request)}
+                      sx={{ minWidth: '40px', mr: 1 }}
+                    >
+                      👁️
+                    </Button>
                   </Tooltip>
                   <Tooltip title="Reply">
-                    <""Button onClick={() => handleReplyOpen(request)}>
-                      <Reply"" />
-                    </""Button>
+                    <Button 
+                      size="small" 
+                      onClick={() => handleReplyOpen(request)}
+                      sx={{ minWidth: '40px' }}
+                    >
+                      ↩️
+                    </Button>
                   </Tooltip>
                 </TableCell>
               </TableRow>
@@ -344,25 +344,31 @@ const SupportRequest = () => {
                 {selectedRequest.message}
               </Typography>
               <Typography variant="subtitle1">Replies:</Typography>
-              {selectedRequest.replies.map((reply) => (
-                <Box
-                  key={reply.id}
-                  sx={{
-                    p: 1,
-                    my: 1,
-                    bgcolor:
-                      reply.sender === "support"
-                        ? "rgba(0,0,255,0.05)"
-                        : "rgba(0,255,0,0.05)",
-                    borderRadius: 1,
-                  }}
-                >
-                  <Typography variant="body2">
-                    <strong>{reply.senderName}</strong> ({formatDate(reply.createdAt)})
-                  </Typography>
-                  <Typography variant="body1">{reply.message}</Typography>
-                </Box>
-              ))}
+              {selectedRequest.replies.length > 0 ? (
+                selectedRequest.replies.map((reply) => (
+                  <Box
+                    key={reply.id}
+                    sx={{
+                      p: 1,
+                      my: 1,
+                      bgcolor:
+                        reply.sender === "support"
+                          ? "rgba(0,0,255,0.05)"
+                          : "rgba(0,255,0,0.05)",
+                      borderRadius: 1,
+                    }}
+                  >
+                    <Typography variant="body2">
+                      <strong>{reply.senderName}</strong> ({formatDate(reply.createdAt)})
+                    </Typography>
+                    <Typography variant="body1">{reply.message}</Typography>
+                  </Box>
+                ))
+              ) : (
+                <Typography variant="body2" color="textSecondary">
+                  No replies yet.
+                </Typography>
+              )}
             </Box>
           )}
         </DialogContent>
@@ -387,6 +393,7 @@ const SupportRequest = () => {
             value={replyMessage}
             onChange={(e) => setReplyMessage(e.target.value)}
             placeholder="Type your reply here..."
+            sx={{ mt: 1 }}
           />
         </DialogContent>
         <DialogActions>

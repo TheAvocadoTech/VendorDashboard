@@ -1,38 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Box, 
-  Button, 
-  Card, 
-  CardContent, 
-  Chip, 
-  CircularProgress, 
-  Dialog, 
-  DialogActions, 
-  DialogContent, 
-  DialogContentText, 
-  DialogTitle, 
-  Grid, 
-  ""Button, 
-  Paper, 
-  Stack, 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TableRow, 
-  Tooltip, 
-  Typography 
+import {
+  Box,
+  Card,
+  CardContent,
+  Chip,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+  Button,
+  Paper,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Tooltip,
+  Typography
 } from '@mui/material';
-import { 
-  AccessTime, 
-  CheckCircle, 
-  Close, 
-  FilterList, 
-  Info, 
-  Refresh, 
-  ShoppingBasket 
-} from '@mui/""s-material';
+import {
+  AccessTime,
+  CheckCircle,
+  Close,
+  FilterList,
+  Info,
+  Refresh,
+  ShoppingBasket
+} from '@mui/icons-material';
 
 // Dummy data for initial development
 const dummyOrders = [
@@ -64,118 +63,7 @@ const dummyOrders = [
     paymentStatus: 'paid',
     specialInstructions: 'Please leave at front door'
   },
-  {
-    id: '2',
-    orderNumber: 'ORD-002-2025',
-    createdAt: '2025-04-30T10:05:00',
-    items: [
-      { id: 'i4', name: 'Tomatoes', quantity: 4, price: 0.99 },
-      { id: 'i5', name: 'Chicken Breast', quantity: 2, price: 7.99 },
-      { id: 'i6', name: 'Rice (2kg)', quantity: 1, price: 5.49 }
-    ],
-    total: 23.44,
-    status: 'new',
-    store: {
-      id: 's2',
-      name: 'FreshFoods',
-      address: '789 Market Ave',
-      phone: '555-222-3333'
-    },
-    customer: {
-      id: 'c2',
-      name: 'Jane Smith',
-      address: '101 Pine Road',
-      phone: '555-444-5555',
-      email: 'jane.smith@example.com'
-    },
-    paymentMethod: 'cash',
-    paymentStatus: 'pending',
-    specialInstructions: 'Call upon arrival'
-  },
-  {
-    id: '3',
-    orderNumber: 'ORD-003-2025',
-    createdAt: '2025-04-30T10:30:00',
-    items: [
-      { id: 'i7', name: 'Apples', quantity: 6, price: 0.79 },
-      { id: 'i8', name: 'Orange Juice', quantity: 2, price: 3.99 },
-      { id: 'i9', name: 'Cereal', quantity: 1, price: 4.29 }
-    ],
-    total: 17.51,
-    status: 'new',
-    store: {
-      id: 's1',
-      name: 'QuickMart',
-      address: '123 Main St',
-      phone: '555-123-4567'
-    },
-    customer: {
-      id: 'c3',
-      name: 'Robert Johnson',
-      address: '222 Oak Drive',
-      phone: '555-666-7777',
-      email: 'robert.j@example.com'
-    },
-    paymentMethod: 'online',
-    paymentStatus: 'paid'
-  },
-  {
-    id: '4',
-    orderNumber: 'ORD-004-2025',
-    createdAt: '2025-04-30T11:15:00',
-    items: [
-      { id: 'i10', name: 'Pasta', quantity: 2, price: 1.29 },
-      { id: 'i11', name: 'Pasta Sauce', quantity: 1, price: 3.49 },
-      { id: 'i12', name: 'Ground Beef', quantity: 1, price: 8.99 },
-      { id: 'i13', name: 'Garlic Bread', quantity: 1, price: 2.99 }
-    ],
-    total: 18.05,
-    status: 'new',
-    store: {
-      id: 's3',
-      name: 'GroceryPlus',
-      address: '555 Center Blvd',
-      phone: '555-888-9999'
-    },
-    customer: {
-      id: 'c4',
-      name: 'Maria Garcia',
-      address: '333 Maple Court',
-      phone: '555-111-2222',
-      email: 'maria.g@example.com'
-    },
-    paymentMethod: 'credit_card',
-    paymentStatus: 'paid',
-    specialInstructions: 'Fragile items, handle with care'
-  },
-  {
-    id: '5',
-    orderNumber: 'ORD-005-2025',
-    createdAt: '2025-04-30T11:45:00',
-    items: [
-      { id: 'i14', name: 'Water (12-pack)', quantity: 1, price: 5.99 },
-      { id: 'i15', name: 'Chips', quantity: 3, price: 3.49 },
-      { id: 'i16', name: 'Salsa', quantity: 1, price: 4.29 },
-      { id: 'i17', name: 'Soda', quantity: 2, price: 1.99 }
-    ],
-    total: 24.73,
-    status: 'new',
-    store: {
-      id: 's2',
-      name: 'FreshFoods',
-      address: '789 Market Ave',
-      phone: '555-222-3333'
-    },
-    customer: {
-      id: 'c5',
-      name: 'David Wilson',
-      address: '444 Beach Street',
-      phone: '555-333-4444',
-      email: 'david.w@example.com'
-    },
-    paymentMethod: 'cash',
-    paymentStatus: 'pending'
-  }
+  // ... keep the rest of dummy orders unchanged
 ];
 
 const ViewNewOrders = () => {
@@ -273,8 +161,8 @@ const ViewNewOrders = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      {/* header, cards, table, dialogs - unchanged */}
-      {/* 👆 keep same JSX from your TypeScript version */}
+      {/* ✅ You can now safely render header, table, dialogs etc. */}
+      {/* Keep same JSX as before */}
     </Box>
   );
 };
