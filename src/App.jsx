@@ -40,7 +40,7 @@ export default function App() {
             <Route index path="/" element={<Home />} />
 
             {/* Others Page */}
-            <Route path="/profile" element={<UserProfiles />} />
+            {/* <Route path="/profile" element={<UserProfiles />} /> */}
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/blank" element={<Blank />} />
 
@@ -93,7 +93,7 @@ export default function App() {
 
             {/* Analytics */}
             <Route path="/SalesPerformance" element={<SalesPerformance />} />
-            <Route path="/PopulationProduct" element={<PopulationProduct />} />
+            {/* <Route path="/PopulationProduct" element={<PopulationProduct />} /> */}
             <Route path="/CustomerFeedback" element={<CustomerFeedback />} />
             <Route
               path="/OrderCompletionRate"
