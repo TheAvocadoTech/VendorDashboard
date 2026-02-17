@@ -1,30 +1,21 @@
 import { useState } from "react";
-import { DropdownItem } from "../ui/dropdown/DropdownItem";
-import { Dropdown } from "../ui/dropdown/Dropdown";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
-// ── Vendor data — replace with your API/props/context as needed ────────────
-const vendorData = {
-  name: "Musharof Chowdhury",
-  email: "randomuser@pimjo.com",
-  avatar: "/images/user/owner.jpg",
-  shopName: "Pimjo Store",
-  shopCategory: "Electronics & Gadgets",
-  shopStatus: "active", // "active" | "inactive"
-  rating: 4.8,
-  totalOrders: 1240,
-  memberSince: "Jan 2022",
-};
+import { Dropdown } from "../ui/dropdown/Dropdown";
+import { useAuth } from "../../context/AuthContext";
 
 export default function UserDropdown() {
+  const { vendor, logout } = useAuth();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  function toggleDropdown() {
-    setIsOpen(!isOpen);
-  }
+  function toggleDropdown() { setIsOpen(!isOpen); }
+  function closeDropdown()  { setIsOpen(false);  }
 
-  function closeDropdown() {
-    setIsOpen(false);
+  // ── Logout: clear auth state + redirect to signin ──────────────────────────
+  function handleSignOut() {
+    logout();
+    navigate("/signin");
   }
 
   return (
@@ -34,11 +25,10 @@ export default function UserDropdown() {
         onClick={toggleDropdown}
         className="flex items-center text-gray-700 dropdown-toggle dark:text-gray-400"
       >
-        {/* <span className="mr-3 overflow-hidden rounded-full h-11 w-11">
-          <img src={vendorData.avatar} alt="User" />
-        </span> */}
-        <span className="block mr-1 font-medium text-theme-sm">Store Name</span>
-       
+        <span className="block mr-1 font-medium text-theme-sm">
+          {/* Show real storeName from auth context */}
+          {vendor?.storeName ?? "Store"}
+        </span>
       </button>
 
       {/* ── Dropdown panel ─────────────────────────────────────────────── */}
@@ -47,10 +37,6 @@ export default function UserDropdown() {
         onClose={closeDropdown}
         className="absolute right-0 mt-[17px] flex w-[300px] flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-dark"
       >
-
-        {/* ── VENDOR HEADER ──────────────────────────────────────────────── */}
-       
-
         {/* ── VENDOR SHOP CARD ───────────────────────────────────────────── */}
         <div className="mt-3 rounded-xl border border-gray-100 bg-white px-3 py-3 dark:border-gray-800 dark:bg-white/[0.03]">
           {/* Shop name + status badge */}
@@ -64,75 +50,47 @@ export default function UserDropdown() {
                 </svg>
               </span>
               <div className="min-w-0">
+                {/* Real storeName and email from context */}
                 <p className="truncate text-sm font-semibold text-gray-800 dark:text-white">
-                  {vendorData.shopName}
+                  {vendor?.storeName ?? "—"}
                 </p>
                 <p className="truncate text-[11px] text-gray-400 dark:text-gray-500">
-                  {vendorData.shopCategory}
+                  {vendor?.email ?? "—"}
                 </p>
               </div>
             </div>
 
-            {/* Active / Inactive badge */}
+            {/* Status badge based on vendor.status */}
             <span
               className={[
                 "shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide",
-                vendorData.shopStatus === "active"
+                vendor?.status === "ACCEPTED"
                   ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400"
-                  : "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400",
+                  : "bg-yellow-100 text-yellow-700 dark:bg-yellow-500/15 dark:text-yellow-400",
               ].join(" ")}
             >
-              {vendorData.shopStatus === "active" ? "Active" : "Inactive"}
+              {vendor?.status === "ACCEPTED" ? "Active" : "Pending"}
             </span>
-          </div>
-
-          {/* Stats row */}
-          <div className="mt-3 grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-800">
-            {/* Rating */}
-            <div className="flex flex-col items-center px-2">
-              <span className="flex items-center gap-0.5 text-sm font-bold text-gray-800 dark:text-white">
-                <svg className="h-3.5 w-3.5 fill-yellow-400" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                {vendorData.rating}
-              </span>
-              <span className="mt-0.5 text-[10px] text-gray-400">Rating</span>
-            </div>
-
-            {/* Orders */}
-            <div className="flex flex-col items-center px-2">
-              <span className="text-sm font-bold text-gray-800 dark:text-white">
-                {vendorData.totalOrders.toLocaleString()}
-              </span>
-              <span className="mt-0.5 text-[10px] text-gray-400">Orders</span>
-            </div>
-
-            {/* Member since */}
-            <div className="flex flex-col items-center px-2">
-              <span className="text-sm font-bold text-gray-800 dark:text-white">
-                {vendorData.memberSince}
-              </span>
-              <span className="mt-0.5 text-[10px] text-gray-400">Since</span>
-            </div>
           </div>
         </div>
 
         {/* ── MENU ITEMS ─────────────────────────────────────────────────── */}
         <ul className="flex flex-col gap-1 pt-3 pb-3 border-b border-gray-200 dark:border-gray-800">
-          {/* Edit profile */}
-          
-
-          {/* Vendor dashboard */}
-         
-
-          {/* Shop settings */}
-          
+          <li>
+            <Link
+              to="/UpdateVendorDetails"
+              onClick={closeDropdown}
+              className="flex items-center gap-3 px-3 py-2 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-white/5"
+            >
+              Account Settings
+            </Link>
+          </li>
         </ul>
 
         {/* ── SIGN OUT ───────────────────────────────────────────────────── */}
-        <Link
-          to="/signin"
-          className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
+        <button
+          onClick={handleSignOut}
+          className="flex items-center gap-3 px-3 py-2 mt-3 w-full font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
         >
           <svg
             className="fill-gray-500 group-hover:fill-gray-700 dark:group-hover:fill-gray-300"
@@ -144,7 +102,7 @@ export default function UserDropdown() {
             />
           </svg>
           Sign Out
-        </Link>
+        </button>
       </Dropdown>
     </div>
   );

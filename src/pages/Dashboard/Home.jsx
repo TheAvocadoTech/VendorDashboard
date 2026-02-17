@@ -46,7 +46,7 @@ export default function Home() {
 
   const [showConfirm, setShowConfirm] = useState(false);
 
-  // Persist toggle state across page reloads
+// Persist toggle state across page reloads
   useEffect(() => {
     try {
       localStorage.setItem("vendor_accepting_orders", JSON.stringify(isAccepting));
