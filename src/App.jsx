@@ -40,12 +40,15 @@ const PrivateRoute = ({ children }) => {
 // Already logged in → redirect to dashboard
 const PublicRoute = ({ children }) => {
   const { vendor } = useAuth();
-  return !vendor ? children : <Navigate to="/" replace />;
+  return !vendor ? children : <Navigate to="/dashboard" replace />;
 };
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 const AppRoutes = () => (
   <Routes>
+    {/* Redirect root to appropriate page based on auth status */}
+    <Route path="/" element={<Navigate to="/signin" replace />} />
+
     {/* Auth — public only */}
     <Route path="/signin" element={<PublicRoute><SignIn /></PublicRoute>} />
     <Route path="/signup" element={<PublicRoute><SignUp /></PublicRoute>} />
@@ -58,7 +61,7 @@ const AppRoutes = () => (
         </PrivateRoute>
       }
     >
-      <Route index path="/" element={<Home />} />
+      <Route path="/dashboard" element={<Home />} />
       <Route path="/calendar" element={<Calendar />} />
       <Route path="/blank" element={<Blank />} />
       <Route path="/form-elements" element={<FormElements />} />
