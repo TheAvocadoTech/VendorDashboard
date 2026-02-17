@@ -408,7 +408,7 @@ const ViewNewOrders = () => {
     if (!selectedOrder || !actionType) return;
     try {
       setActionLoading(true);
-      const res  = await fetch(`http://localhost:8000/api/order/vendor/${selectedOrder._id}/status`, {
+      const res  = await fetch(`https://api.minutos.in/api/order/vendor/${selectedOrder._id}/status`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ status: actionType === "accept" ? "ACCEPTED" : "REJECTED" }),
