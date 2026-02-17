@@ -386,7 +386,7 @@ const ViewNewOrders = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res  = await fetch("http://localhost:8000/api/order/vendor/orders", {
+      const res  = await fetch("https://api.minutos.in/api/order/vendor/orders", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
