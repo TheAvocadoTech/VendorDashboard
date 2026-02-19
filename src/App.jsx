@@ -28,6 +28,7 @@ import SalesPerformance from "./components/ui/vendor-analytics/SalesPerformance"
 import ManagePaymentDetails from "./components/ui/account-settings/ManagePaymentDetails";
 import CustomerFeedback from "./components/ui/vendor-analytics/CustomerFeedback";
 import OrderCompletionRate from "./components/ui/vendor-analytics/OrderCompletionRate";
+import SiginInLogin from "./components/auth/SignInForm";
 
 // ── Guards ────────────────────────────────────────────────────────────────────
 
@@ -50,8 +51,8 @@ const AppRoutes = () => (
     <Route path="/" element={<Navigate to="/signin" replace />} />
 
     {/* Auth — public only */}
-    <Route path="/signin" element={<PublicRoute><SignIn /></PublicRoute>} />
-    <Route path="/signup" element={<PublicRoute><SignUp /></PublicRoute>} />
+    <Route path="/signin" element={<PublicRoute><SiginInLogin /></PublicRoute>} />
+    {/* <Route path="/signup" element={<PublicRoute><SignUp /></PublicRoute>} /> */}
 
     {/* Dashboard — protected */}
     <Route

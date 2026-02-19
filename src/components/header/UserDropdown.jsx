@@ -27,7 +27,7 @@ export default function UserDropdown() {
       >
         <span className="block mr-1 font-medium text-theme-sm">
           {/* Show real storeName from auth context */}
-          {vendor?.storeName ?? "Store"}
+          {vendor?.businessName ?? "Business name"}
         </span>
       </button>
 
