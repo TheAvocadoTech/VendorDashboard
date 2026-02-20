@@ -127,26 +127,43 @@ const handleVerifyOtp = async (e) => {
         )}
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="hidden lg:flex lg:w-1/2 bg-red-500 flex-col justify-center px-20 text-white relative">
-  <div className="hidden lg:flex lg:w-1/2 bg-red-500 flex-col justify-center px-20 text-white relative">
-  <div className="z-10">
-    {/* Logo — white & large */}
-    <img
-      src="https://www.minutos.in/minitos.png"
-      alt="Minutos Logo"
-      className="w-56 mb-10 brightness-0 invert"
-    />
 
-    <h2 className="text-4xl font-bold mb-6">Welcome back to <br /> Vendor Dashboard</h2>
-    <p className="text-red-100 text-lg mb-10">Enter your registered phone number to manage your inventory and orders instantly.</p>
+<div
+  className="hidden lg:flex lg:w-1/2 flex-col justify-center px-20 text-white relative bg-red-500 overflow-hidden"
+  style={{
+    backgroundImage: `
+      linear-gradient(rgba(239,68,68,0.85), rgba(239,68,68,0.85)),
+      url('https://res.cloudinary.com/dgfxvpxbr/image/upload/v1771606162/icon_griu2i.png')
+    `,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right center",
+    backgroundSize: "600px",
+  }}
+>
+  <div className="relative z-10">
+    <h2 className="text-4xl font-bold mb-6">
+      Welcome back to <br /> Vendor Dashboard
+    </h2>
+
+    <p className="text-red-100 text-lg mb-10">
+      Enter your registered phone number to manage your inventory and orders instantly.
+    </p>
+
     <ul className="space-y-4">
-      <li className="flex items-center gap-3"><span className="bg-white/20 p-1 rounded-full text-xs">✓</span> Instant OTP verification</li>
-      <li className="flex items-center gap-3"><span className="bg-white/20 p-1 rounded-full text-xs">✓</span> Real-time order tracking</li>
-      <li className="flex items-center gap-3"><span className="bg-white/20 p-1 rounded-full text-xs">✓</span> Secure vendor panel</li>
+      <li className="flex items-center gap-3">
+        <span className="bg-white/20 p-1 rounded-full text-xs">✓</span>
+        Instant OTP verification
+      </li>
+      <li className="flex items-center gap-3">
+        <span className="bg-white/20 p-1 rounded-full text-xs">✓</span>
+        Real-time order tracking
+      </li>
+      <li className="flex items-center gap-3">
+        <span className="bg-white/20 p-1 rounded-full text-xs">✓</span>
+        Secure vendor panel
+      </li>
     </ul>
   </div>
-</div>
 </div>
     </div>
   );
