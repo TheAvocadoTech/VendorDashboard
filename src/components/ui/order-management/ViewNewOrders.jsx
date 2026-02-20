@@ -9,7 +9,7 @@ import {
 import {
   Refresh, CheckCircle, Close, Visibility,
   ShoppingBag, LocationOn, Inventory2, AttachMoney, AccessTime, Receipt, Person,
-  Download,
+  Download, CreditCard, CheckCircleOutline, HourglassEmpty,
 } from "@mui/icons-material";
 
 // ─── Invoice Generator (client-side print-to-PDF) ─────────────────────────────
@@ -26,6 +26,8 @@ const generateInvoice = (order) => {
   const invoiceNo = `INV-${order._id?.slice(-10).toUpperCase()}`;
   const subtotal  = order.items?.reduce((s, i) => s + i.price * i.quantity, 0) || 0;
   const totalDisc = order.items?.reduce((s, i) => s + ((i.originalPrice || i.price) - i.price) * i.quantity, 0) || 0;
+  const payment   = order.payment || {};
+  const isPaid    = payment.status === "PAID";
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -37,7 +39,6 @@ const generateInvoice = (order) => {
   body { font-family: 'Segoe UI', Arial, sans-serif; background:#fff; color:#111827; font-size:13px; }
   .page { width:210mm; min-height:297mm; margin:0 auto; padding:14mm 16mm; }
 
-  /* Header */
   .header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
   .brand-name { font-size:28px; font-weight:900; color:#e53935; letter-spacing:-1px; }
   .brand-sub  { font-size:10px; color:#9ca3af; margin-top:2px; }
@@ -45,7 +46,6 @@ const generateInvoice = (order) => {
   .inv-num    { font-size:10px; color:#9ca3af; text-align:right; font-family:monospace; }
   .red-bar    { height:3px; background:#e53935; border-radius:2px; margin:10px 0; }
 
-  /* Meta pills */
   .meta-row { display:flex; gap:0; border:1px solid #e2e6f0; border-radius:8px; overflow:hidden; margin-bottom:16px; }
   .meta-cell { flex:1; padding:10px 14px; background:#f7f8fc; border-right:1px solid #e2e6f0; }
   .meta-cell:last-child { border-right:none; }
@@ -53,7 +53,6 @@ const generateInvoice = (order) => {
   .meta-val { font-size:11px; font-weight:700; color:#111827; }
   .meta-val.status { color:#2563eb; }
 
-  /* Bill/From */
   .parties { display:flex; gap:0; margin-bottom:16px; }
   .party { flex:1; padding:0 16px 0 0; }
   .party + .party { padding:0 0 0 16px; border-left:1px solid #e2e6f0; }
@@ -63,7 +62,6 @@ const generateInvoice = (order) => {
 
   .divider { border:none; border-top:1px solid #e2e6f0; margin:12px 0; }
 
-  /* Items table */
   table.items { width:100%; border-collapse:collapse; margin-bottom:10px; border-radius:8px; overflow:hidden; border:1px solid #e2e6f0; }
   table.items thead tr { background:#e53935; }
   table.items thead th { color:#fff; font-size:9px; text-transform:uppercase; letter-spacing:.5px; padding:9px 8px; font-weight:700; text-align:center; }
@@ -75,8 +73,7 @@ const generateInvoice = (order) => {
   table.items tbody td.product-name { font-weight:700; color:#111827; font-size:12px; }
   table.items tbody td.total-cell { font-weight:800; color:#e53935; font-size:13px; }
 
-  /* Totals */
-  .totals-wrap { display:flex; justify-content:flex-end; margin-bottom:20px; }
+  .totals-wrap { display:flex; justify-content:flex-end; margin-bottom:16px; }
   .totals-box  { width:260px; border:1px solid #e2e6f0; border-radius:8px; overflow:hidden; }
   .tot-row { display:flex; justify-content:space-between; padding:7px 14px; font-size:11px; border-bottom:1px solid #e2e6f0; }
   .tot-row:last-child { border-bottom:none; }
@@ -87,11 +84,20 @@ const generateInvoice = (order) => {
   .tot-row.grand .lbl { font-size:13px; font-weight:800; color:#111827; }
   .tot-row.grand .val { font-size:18px; font-weight:900; color:#e53935; }
 
-  /* Footer */
+  /* Payment Section */
+  .payment-box { border:1px solid #e2e6f0; border-radius:8px; overflow:hidden; margin-bottom:20px; }
+  .payment-header { background:${isPaid ? "#f0fdf4" : "#fefce8"}; padding:9px 14px; display:flex; align-items:center; gap:8px; border-bottom:1px solid #e2e6f0; }
+  .payment-status-dot { width:8px; height:8px; border-radius:50%; background:${isPaid ? "#16a34a" : "#d97706"}; }
+  .payment-status-label { font-size:11px; font-weight:800; color:${isPaid ? "#16a34a" : "#d97706"}; text-transform:uppercase; letter-spacing:.5px; }
+  .payment-grid { display:flex; }
+  .payment-cell { flex:1; padding:10px 14px; border-right:1px solid #e2e6f0; }
+  .payment-cell:last-child { border-right:none; }
+  .payment-lbl { font-size:9px; text-transform:uppercase; letter-spacing:.6px; color:#9ca3af; font-weight:700; margin-bottom:3px; }
+  .payment-val { font-size:11px; font-weight:600; color:#111827; font-family:monospace; word-break:break-all; }
+
   .footer { border-top:1px solid #e2e6f0; padding-top:10px; text-align:center; color:#9ca3af; font-size:9px; line-height:1.7; }
   .footer b { color:#6b7280; }
 
-  /* Stamp */
   .paid-stamp {
     position:absolute; top:55mm; right:14mm;
     border:3px solid #16a34a; color:#16a34a; padding:6px 14px;
@@ -109,7 +115,6 @@ const generateInvoice = (order) => {
 <div class="page" style="position:relative;">
   <div class="paid-stamp">INVOICE</div>
 
-  <!-- Header -->
   <div class="header">
     <div>
       <div class="brand-name">Minutos</div>
@@ -122,7 +127,6 @@ const generateInvoice = (order) => {
   </div>
   <div class="red-bar"></div>
 
-  <!-- Meta -->
   <div class="meta-row">
     <div class="meta-cell">
       <div class="meta-lbl">Date Issued</div>
@@ -142,7 +146,6 @@ const generateInvoice = (order) => {
     </div>
   </div>
 
-  <!-- Parties -->
   <div class="parties">
     <div class="party">
       <div class="party-lbl">Bill To</div>
@@ -165,7 +168,6 @@ const generateInvoice = (order) => {
   </div>
   <hr class="divider"/>
 
-  <!-- Items Table -->
   <table class="items">
     <thead>
       <tr>
@@ -195,7 +197,6 @@ const generateInvoice = (order) => {
     </tbody>
   </table>
 
-  <!-- Totals -->
   <div class="totals-wrap">
     <div class="totals-box">
       <div class="tot-row">
@@ -213,7 +214,32 @@ const generateInvoice = (order) => {
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Payment Details -->
+  ${payment.razorpayOrderId || payment.status ? `
+  <div style="margin-bottom:10px;">
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:#9ca3af;font-weight:700;margin-bottom:8px;">Payment Details</div>
+    <div class="payment-box">
+      <div class="payment-header">
+        <div class="payment-status-dot"></div>
+        <span class="payment-status-label">${payment.status || "UNKNOWN"}</span>
+        ${payment.paidAt ? `<span style="font-size:9px;color:#6b7280;margin-left:auto;">Paid on ${fmtDate(payment.paidAt)}</span>` : ""}
+      </div>
+      <div class="payment-grid">
+        ${payment.razorpayOrderId ? `
+        <div class="payment-cell">
+          <div class="payment-lbl">Razorpay Order ID</div>
+          <div class="payment-val">${payment.razorpayOrderId}</div>
+        </div>` : ""}
+        ${payment.razorpayPaymentId ? `
+        <div class="payment-cell">
+          <div class="payment-lbl">Payment ID</div>
+          <div class="payment-val">${payment.razorpayPaymentId}</div>
+        </div>` : ""}
+      </div>
+    </div>
+  </div>
+  ` : ""}
+
   <div class="footer">
     <b>Thank you for shopping with Minutos!</b><br/>
     For support: support@minutos.in &nbsp;|&nbsp; www.minutos.in<br/>
@@ -263,6 +289,13 @@ const statusMeta = (s) =>
     REJECTED:  { color: C.error,   bg: C.errorBg,   label: "Rejected"  },
     COMPLETED: { color: C.warning, bg: C.warningBg, label: "Completed" },
   }[s] || { color: C.sub, bg: C.surfaceAlt, label: s });
+
+const paymentStatusMeta = (s) =>
+  ({
+    PAID:    { color: C.success, bg: C.successBg, label: "Paid",    icon: CheckCircleOutline },
+    PENDING: { color: C.warning, bg: C.warningBg, label: "Pending", icon: HourglassEmpty    },
+    FAILED:  { color: C.error,   bg: C.errorBg,   label: "Failed",  icon: Close             },
+  }[s] || { color: C.sub, bg: C.surfaceAlt, label: s || "Unknown", icon: CreditCard });
 
 const initials = (first = "", last = "") =>
   `${first?.[0] || ""}${last?.[0] || ""}`.toUpperCase() || "?";
@@ -331,13 +364,25 @@ const StatusChip = ({ status }) => {
   );
 };
 
+// ─── PaymentChip ──────────────────────────────────────────────────────────────
+const PaymentChip = ({ status }) => {
+  const m = paymentStatusMeta(status);
+  const Icon = m.icon;
+  return (
+    <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.6, px: 1.2, py: 0.35, borderRadius: "20px", bgcolor: m.bg, border: `1px solid ${m.color}33` }}>
+      <Icon sx={{ fontSize: 12, color: m.color }} />
+      <Typography sx={{ fontSize: 11.5, fontWeight: 700, color: m.color, letterSpacing: 0.2 }}>{m.label}</Typography>
+    </Box>
+  );
+};
+
 // ─── InfoRow ──────────────────────────────────────────────────────────────────
-const InfoRow = ({ icon: Icon, label, value }) => (
+const InfoRow = ({ icon: Icon, label, value, mono = false }) => (
   <Stack direction="row" alignItems="flex-start" spacing={1.2} sx={{ py: 0.7 }}>
     <Icon sx={{ fontSize: 15, color: C.muted, mt: 0.3 }} />
-    <Box>
+    <Box sx={{ minWidth: 0 }}>
       <Typography sx={{ fontSize: 10.5, color: C.muted, textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 600 }}>{label}</Typography>
-      <Typography sx={{ fontSize: 13, color: C.text, fontWeight: 500, mt: 0.15 }}>{value || "—"}</Typography>
+      <Typography sx={{ fontSize: 12.5, color: C.text, fontWeight: 500, mt: 0.15, wordBreak: "break-all", fontFamily: mono ? "monospace" : "inherit" }}>{value || "—"}</Typography>
     </Box>
   </Stack>
 );
@@ -432,11 +477,73 @@ const ProductCard = ({ item }) => {
   );
 };
 
-// ─── Order Detail Drawer ──────────────────────────────────────────────────────
-// Uses Drawer instead of Dialog to slide in from the right BELOW the app navbar,
-// completely avoiding z-index conflicts with the top header.
+// ─── Payment Section ──────────────────────────────────────────────────────────
+const PaymentSection = ({ payment }) => {
+  if (!payment) return null;
+  const m = paymentStatusMeta(payment.status);
+  const fmtDate = (iso) => {
+    try { return new Date(iso).toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }); }
+    catch { return iso; }
+  };
+
+  return (
+    <Box sx={{ border: `1px solid ${C.border}`, borderRadius: 2, overflow: "hidden", bgcolor: C.surface }}>
+      {/* Header bar */}
+      <Box sx={{ px: 2, py: 1.2, bgcolor: m.bg, borderBottom: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Stack direction="row" spacing={1} alignItems="center">
+          <CreditCard sx={{ fontSize: 15, color: m.color }} />
+          <Typography sx={{ fontSize: 12, fontWeight: 800, color: m.color, textTransform: "uppercase", letterSpacing: 0.4 }}>
+            Payment · {payment.status || "Unknown"}
+          </Typography>
+        </Stack>
+        {payment.paidAt && (
+          <Typography sx={{ fontSize: 11, color: C.sub }}>
+            Paid on {fmtDate(payment.paidAt)}
+          </Typography>
+        )}
+      </Box>
+
+      {/* ID Fields */}
+      <Box sx={{ p: 2 }}>
+        <Stack spacing={0.5}>
+          {payment.razorpayOrderId && (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1, px: 1.5, py: 1, borderRadius: 1.5, bgcolor: C.surfaceAlt, border: `1px solid ${C.border}` }}>
+              <Typography sx={{ fontSize: 10.5, color: C.muted, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, minWidth: 120 }}>
+                Razorpay Order ID
+              </Typography>
+              <Typography sx={{ fontSize: 12, color: C.text, fontFamily: "monospace", fontWeight: 600, wordBreak: "break-all" }}>
+                {payment.razorpayOrderId}
+              </Typography>
+            </Box>
+          )}
+          {payment.razorpayPaymentId && (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1, px: 1.5, py: 1, borderRadius: 1.5, bgcolor: C.surfaceAlt, border: `1px solid ${C.border}` }}>
+              <Typography sx={{ fontSize: 10.5, color: C.muted, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, minWidth: 120 }}>
+                Payment ID
+              </Typography>
+              <Typography sx={{ fontSize: 12, color: C.text, fontFamily: "monospace", fontWeight: 600, wordBreak: "break-all" }}>
+                {payment.razorpayPaymentId}
+              </Typography>
+            </Box>
+          )}
+          {payment.razorpaySignature && (
+            <Box sx={{ px: 1.5, py: 1, borderRadius: 1.5, bgcolor: C.surfaceAlt, border: `1px solid ${C.border}` }}>
+              <Typography sx={{ fontSize: 10.5, color: C.muted, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, mb: 0.4 }}>
+                Signature
+              </Typography>
+              <Typography sx={{ fontSize: 10.5, color: C.sub, fontFamily: "monospace", wordBreak: "break-all", lineHeight: 1.6 }}>
+                {payment.razorpaySignature}
+              </Typography>
+            </Box>
+          )}
+        </Stack>
+      </Box>
+    </Box>
+  );
+};
+
+// ─── Order Detail Modal ───────────────────────────────────────────────────────
 const OrderDetailModal = ({ order, onClose }) => {
-  // Lock body scroll & handle Escape key
   React.useEffect(() => {
     if (!order) return;
     document.body.style.overflow = "hidden";
@@ -453,8 +560,6 @@ const OrderDetailModal = ({ order, onClose }) => {
   const addr = order.shippingAddress || {};
   const addrLine = [addr.line1, addr.line2, addr.city, addr.state, addr.pincode].filter(Boolean).join(", ");
 
-  // ✅ Portal renders DIRECTLY into document.body — completely outside any
-  // app wrapper / navbar stacking context, so z-index battles are impossible.
   return ReactDOM.createPortal(
     <div style={{
       position: "fixed", inset: 0,
@@ -472,7 +577,7 @@ const OrderDetailModal = ({ order, onClose }) => {
       {/* Panel */}
       <div style={{
         position: "relative", zIndex: 1,
-        width: "100%", maxWidth: 860, maxHeight: "90vh",
+        width: "100%", maxWidth: 900, maxHeight: "90vh",
         backgroundColor: C.surface,
         borderRadius: 14,
         boxShadow: "0 24px 80px rgba(0,0,0,0.22)",
@@ -499,6 +604,7 @@ const OrderDetailModal = ({ order, onClose }) => {
           </Stack>
           <Stack direction="row" spacing={1} alignItems="center">
             <StatusChip status={order.status} />
+            {order.payment?.status && <PaymentChip status={order.payment.status} />}
             <Button
               size="small"
               variant="contained"
@@ -518,12 +624,12 @@ const OrderDetailModal = ({ order, onClose }) => {
           </Stack>
         </div>
 
-        {/* ── Body (two column) ── */}
+        {/* ── Body ── */}
         <div style={{ display: "flex", flex: 1, overflow: "hidden", minHeight: 0 }}>
 
-          {/* LEFT — Customer / Address / Info */}
+          {/* LEFT — Customer / Address / Info / Payment */}
           <div style={{
-            width: 280, flexShrink: 0,
+            width: 300, flexShrink: 0,
             borderRight: `1px solid ${C.border}`,
             overflowY: "auto", padding: 24,
           }}>
@@ -564,6 +670,17 @@ const OrderDetailModal = ({ order, onClose }) => {
               value={order.createdAt ? new Date(order.createdAt).toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "—"} />
             <InfoRow icon={ShoppingBag} label="Total items" value={`${order.items?.length || 0} item(s)`} />
             <InfoRow icon={AttachMoney} label="Order total" value={fmt(order.totalAmount)} />
+
+            {/* ── Payment Details ── */}
+            {order.payment && (
+              <>
+                <Divider sx={{ my: 2, borderColor: C.border }} />
+                <Typography sx={{ fontSize: 10.5, color: C.muted, textTransform: "uppercase", letterSpacing: 0.8, fontWeight: 700, mb: 1.5 }}>
+                  Payment
+                </Typography>
+                <PaymentSection payment={order.payment} />
+              </>
+            )}
           </div>
 
           {/* RIGHT — Products */}
@@ -582,7 +699,7 @@ const OrderDetailModal = ({ order, onClose }) => {
         </div>
       </div>
     </div>,
-    document.body  // ← Portal escape hatch — renders outside entire React app tree
+    document.body
   );
 };
 
@@ -733,7 +850,7 @@ const ViewNewOrders = () => {
           <Table>
             <TableHead>
               <TableRow sx={{ bgcolor: C.surfaceAlt }}>
-                {["Order ID", "Customer", "Items", "Total", "Status", "Actions"].map((h) => (
+                {["Order ID", "Customer", "Items", "Total", "Status", "Payment", "Actions"].map((h) => (
                   <TableCell key={h} sx={{ color: C.muted, fontWeight: 700, fontSize: 11, textTransform: "uppercase", letterSpacing: 0.6, borderBottom: `1px solid ${C.border}`, py: 1.5 }}>
                     {h}
                   </TableCell>
@@ -743,13 +860,13 @@ const ViewNewOrders = () => {
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={6} align="center" sx={{ py: 6, borderBottom: "none" }}>
+                  <TableCell colSpan={7} align="center" sx={{ py: 6, borderBottom: "none" }}>
                     <CircularProgress size={28} sx={{ color: C.accent }} />
                   </TableCell>
                 </TableRow>
               ) : orders.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} align="center" sx={{ py: 8, borderBottom: "none" }}>
+                  <TableCell colSpan={7} align="center" sx={{ py: 8, borderBottom: "none" }}>
                     <ShoppingBag sx={{ fontSize: 38, color: C.border, display: "block", mx: "auto", mb: 1 }} />
                     <Typography sx={{ color: C.muted, fontSize: 14 }}>No orders found</Typography>
                   </TableCell>
@@ -792,6 +909,12 @@ const ViewNewOrders = () => {
                         <Typography sx={{ fontSize: 14, fontWeight: 700, color: C.accent }}>{fmt(order.totalAmount)}</Typography>
                       </TableCell>
                       <TableCell><StatusChip status={order.status} /></TableCell>
+                      <TableCell>
+                        {order.payment?.status
+                          ? <PaymentChip status={order.payment.status} />
+                          : <Typography sx={{ fontSize: 12, color: C.muted }}>—</Typography>
+                        }
+                      </TableCell>
                       <TableCell>
                         <Stack direction="row" spacing={0.8}>
                           <Tooltip title="View Details" arrow>
